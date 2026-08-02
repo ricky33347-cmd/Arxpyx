@@ -31,6 +31,8 @@
     --body-bg: #020817;
     --card-bg: #040f26;
     --grid-line: rgba(0,229,255,0.03);
+    --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --spring-soft: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   body.light-mode {
@@ -1338,17 +1340,320 @@
     font-family: var(--font-mono);
   }
 
-  /* ====== ANIMATIONS ====== */
+  /* ====== ABOUT ====== */
+  #about {
+    padding: 7rem 0;
+    background: linear-gradient(180deg, transparent, rgba(0,229,255,0.02), transparent);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    margin-top: 3rem;
+  }
+
+  .about-copy p {
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    line-height: 1.85;
+    font-weight: 300;
+    margin-bottom: 1.25rem;
+  }
+
+  .about-copy p strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .about-values {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--glass-border);
+    border: 1px solid var(--glass-border);
+    margin-top: 2.5rem;
+  }
+
+  .about-value {
+    background: var(--card-bg);
+    padding: 1.5rem 1.25rem;
+    text-align: center;
+    transition: transform 0.35s var(--spring), background 0.3s ease;
+  }
+
+  .about-value:hover { transform: translateY(-4px); background: rgba(0,229,255,0.04); }
+
+  .about-value-icon { font-size: 1.3rem; margin-bottom: 0.6rem; }
+
+  .about-value-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cyan-500);
+    font-family: var(--font-mono);
+    margin-bottom: 0.4rem;
+  }
+
+  .about-value-desc {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* AI network visual — CSS/SVG only, no external images or packages */
+  .ai-visual {
+    position: relative;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    aspect-ratio: 1 / 0.85;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .ai-visual-label {
+    position: absolute;
+    top: 1.25rem; left: 1.5rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    z-index: 2;
+  }
+
+  .ai-visual svg { width: 100%; height: 100%; }
+
+  .ai-node { animation: ai-node-pulse 3s ease-in-out infinite; transform-origin: center; }
+  .ai-node.n1 { animation-delay: 0s; }
+  .ai-node.n2 { animation-delay: 0.4s; }
+  .ai-node.n3 { animation-delay: 0.8s; }
+  .ai-node.n4 { animation-delay: 1.2s; }
+  .ai-node.n5 { animation-delay: 1.6s; }
+  .ai-node.n6 { animation-delay: 2s; }
+  .ai-node.n7 { animation-delay: 0.6s; }
+  .ai-node.n8 { animation-delay: 1.4s; }
+
+  @keyframes ai-node-pulse {
+    0%, 100% { opacity: 0.55; r: 4; }
+    50% { opacity: 1; r: 6.5; }
+  }
+
+  .ai-pulse-line {
+    stroke-dasharray: 6 10;
+    animation: ai-line-flow 2.4s linear infinite;
+  }
+
+  @keyframes ai-line-flow {
+    to { stroke-dashoffset: -32; }
+  }
+
+  /* ====== CONTACT ====== */
+  #contact { padding: 7rem 0; }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 3rem;
+    margin-top: 3rem;
+  }
+
+  .contact-info-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    padding: 2.5rem;
+  }
+
+  .contact-info-title {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+
+  .contact-info-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 2rem;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-top: 1px solid var(--glass-border);
+    transition: transform 0.3s var(--spring);
+  }
+
+  .contact-item:hover { transform: translateX(4px); }
+
+  .contact-item-icon {
+    width: 36px; height: 36px;
+    flex-shrink: 0;
+    border: 1px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: var(--cyan-500);
+  }
+
+  .contact-item-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    margin-bottom: 0.2rem;
+  }
+
+  .contact-item-value {
+    font-size: 0.88rem;
+    color: var(--text-primary);
+    font-weight: 500;
+    text-decoration: none;
+    display: block;
+  }
+
+  .contact-item-value:hover { color: var(--cyan-500); }
+
+  .contact-form {
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    padding: 2.5rem;
+    position: relative;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .form-group { margin-bottom: 1.25rem; }
+
+  .form-label {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    margin-bottom: 0.5rem;
+  }
+
+  .form-input, .form-textarea {
+    width: 100%;
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    outline: none;
+    padding: 0.85rem 1rem;
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    font-size: 0.88rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .form-input:focus, .form-textarea:focus {
+    border-color: var(--cyan-500);
+    box-shadow: var(--cyan-glow-sm);
+  }
+
+  .form-textarea { resize: vertical; min-height: 120px; font-family: var(--font-main); }
+
+  .form-input::placeholder, .form-textarea::placeholder { color: var(--text-muted); }
+
+  .form-submit-btn {
+    background: var(--cyan-500);
+    border: 1.5px solid var(--cyan-500);
+    color: var(--navy-900);
+    padding: 0.85rem 2rem;
+    font-family: var(--font-main);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: var(--cyan-glow);
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    transition: transform 0.25s var(--spring), background 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .form-submit-btn:hover { background: var(--cyan-300); transform: translateY(-2px); }
+  .form-submit-btn:active { transform: scale(0.95); }
+  .form-submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  .form-success {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: #00ff88;
+    font-family: var(--font-mono);
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+    transition: opacity 0.4s var(--spring), transform 0.4s var(--spring);
+  }
+
+  .form-success.visible { opacity: 1; transform: translateY(0) scale(1); }
+
+  @media (max-width: 1024px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .about-values { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    .form-row { grid-template-columns: 1fr; gap: 0; }
+  }
+
+  /* ====== ANIMATIONS (Framer-Motion style: spring easing, stagger, hover/tap) ====== */
   .fade-in {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transform: translateY(24px) scale(0.98);
+    transition: opacity 0.7s var(--spring-soft), transform 0.7s var(--spring-soft);
   }
 
   .fade-in.visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fade-in { transition: opacity 0.3s linear; transform: none !important; }
+    .hero-title, .hero-badge-dot, .sh-dot, .partners-track, .ai-node, .ai-pulse-line { animation: none !important; }
+  }
+
+  /* Hover-lift: springy elevation for cards, used across services/paths/jobs/team/testimonials/blog */
+  .hover-lift {
+    transition: transform 0.35s var(--spring), box-shadow 0.35s var(--spring), background 0.3s ease;
+  }
+  .hover-lift:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px -20px rgba(0,229,255,0.25);
+  }
+  .hover-lift:active { transform: translateY(-2px) scale(0.99); }
+
+  /* Tap/press feedback for buttons */
+  .btn-solid, .btn-glow {
+    transition: transform 0.2s var(--spring), background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+  }
+  .btn-solid:active, .btn-glow:active { transform: scale(0.95); }
 
   /* Glitch effect on hero */
   @keyframes glitch {
@@ -1359,6 +1664,22 @@
   }
 
   .hero-title { animation: glitch 8s ease-in-out infinite; }
+
+  /* Hero entrance choreography — staggered fade + rise on page load, Framer-Motion "container/item variants" style */
+  @keyframes heroRise {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-panel > * {
+    opacity: 0;
+    animation: heroRise 0.7s var(--spring-soft) forwards;
+  }
+  .hero-panel > *:nth-child(1) { animation-delay: 0.05s; }
+  .hero-panel > *:nth-child(2) { animation-delay: 0.15s; }
+  .hero-panel > *:nth-child(3) { animation-delay: 0.25s; }
+  .hero-panel > *:nth-child(4) { animation-delay: 0.35s; }
+  .hero-panel > *:nth-child(5) { animation-delay: 0.45s; }
+  .hero-panel > *:nth-child(6) { animation-delay: 0.55s; }
 
   /* ====== RESPONSIVE ====== */
   @media (max-width: 1024px) {
@@ -1396,10 +1717,12 @@
   <a href="#" class="nav-logo">ARC<span>PYX</span></a>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
     <li><a href="#recruitment">Jobs</a></li>
     <li><a href="#how-we-help">Solutions</a></li>
     <li><a href="#team">Team</a></li>
     <li><a href="#blog">Insights</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:0;">
     <button class="theme-toggle" id="theme-toggle" title="Toggle light/dark mode" onclick="toggleTheme()">🌙</button>
@@ -1553,47 +1876,110 @@
       <p class="section-desc">Proactive, AI-augmented technical services that eliminate downtime and keep your systems secured, optimised, and always operational.</p>
     </div>
     <div class="services-grid">
-      <div class="service-card fade-in">
+      <div class="service-card hover-lift fade-in">
         <span class="service-card-num">01</span>
         <div class="service-card-icon">🛡</div>
         <h3 class="service-card-title">Network Security</h3>
         <p class="service-card-desc">Advanced threat detection powered by AI. Zero-trust architecture implementation, penetration testing, and 24/7 SOC monitoring to protect your perimeter.</p>
         <a href="#" class="service-card-link">Learn more →</a>
       </div>
-      <div class="service-card fade-in" style="transition-delay:0.1s">
+      <div class="service-card hover-lift fade-in" style="transition-delay:0.1s">
         <span class="service-card-num">02</span>
         <div class="service-card-icon">⚡</div>
         <h3 class="service-card-title">Help Desk & Support</h3>
         <p class="service-card-desc">Tier 1–3 support with sub-4-minute response SLAs. AI-triage routes tickets intelligently, resolving 73% of common issues without human intervention.</p>
         <a href="#" class="service-card-link">Learn more →</a>
       </div>
-      <div class="service-card fade-in" style="transition-delay:0.2s">
+      <div class="service-card hover-lift fade-in" style="transition-delay:0.2s">
         <span class="service-card-num">03</span>
         <div class="service-card-icon">☁</div>
         <h3 class="service-card-title">Cloud Migration</h3>
         <p class="service-card-desc">Seamless AWS, Azure, and GCP migrations with zero-downtime strategies. Our cloud architects design, execute, and optimise multi-cloud environments.</p>
         <a href="#" class="service-card-link">Learn more →</a>
       </div>
-      <div class="service-card fade-in" style="transition-delay:0.3s">
+      <div class="service-card hover-lift fade-in" style="transition-delay:0.3s">
         <span class="service-card-num">04</span>
         <div class="service-card-icon">🤖</div>
         <h3 class="service-card-title">AI-Driven Automation</h3>
         <p class="service-card-desc">Eliminate repetitive IT tasks with intelligent automation pipelines. From patch management to compliance reporting — let AI handle the routine.</p>
         <a href="#" class="service-card-link">Learn more →</a>
       </div>
-      <div class="service-card fade-in" style="transition-delay:0.4s">
+      <div class="service-card hover-lift fade-in" style="transition-delay:0.4s">
         <span class="service-card-num">05</span>
         <div class="service-card-icon">📊</div>
         <h3 class="service-card-title">Infrastructure Monitoring</h3>
         <p class="service-card-desc">Real-time observability across your entire stack. Predictive alerts surface issues before they impact users, with automated remediation playbooks.</p>
         <a href="#" class="service-card-link">Learn more →</a>
       </div>
-      <div class="service-card fade-in" style="transition-delay:0.5s">
+      <div class="service-card hover-lift fade-in" style="transition-delay:0.5s">
         <span class="service-card-num">06</span>
         <div class="service-card-icon">🔧</div>
         <h3 class="service-card-title">Managed DevOps</h3>
         <p class="service-card-desc">CI/CD pipeline design, container orchestration, and infrastructure-as-code. We embed with your team to accelerate delivery and eliminate bottlenecks.</p>
         <a href="#" class="service-card-link">Learn more →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== ABOUT ====== -->
+<section id="about">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-label">Who We Are</div>
+      <h2 class="section-title">About Arcpyx</h2>
+      <p class="section-desc">Boutique IT support and technical recruitment, built for organisations that can't afford to stand still.</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-copy fade-in">
+        <p>Arcpyx was founded on a simple observation: most IT support is reactive, and most recruitment is slow. Both problems have the same root cause — a lack of intelligence at the point of decision. So we built our practice around <strong>AI-augmented systems</strong> that spot infrastructure issues before they become incidents, and surface the right technical candidate before your best people burn out doing the search themselves.</p>
+        <p>Today we support <strong>500+ client organisations</strong>, from Series A startups to regulated enterprises, and have placed thousands of engineers, architects, and technical leaders across the UK, Ireland, and beyond. Every engagement — support or recruitment — runs through the same principle: <strong>human expertise, sharpened by AI, never replaced by it.</strong></p>
+        <p>We're engineers and technologists ourselves, which means we don't hand you off to a call centre or a keyword-matching algorithm. You get a dedicated team that understands your stack, your culture, and your stakes.</p>
+      </div>
+      <div class="ai-visual fade-in" style="transition-delay:0.15s" aria-hidden="true">
+        <span class="ai-visual-label">// AI Inference Layer</span>
+        <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg">
+          <g stroke="var(--cyan-500)" stroke-opacity="0.35" stroke-width="1" fill="none">
+            <path class="ai-pulse-line" d="M70,90 L200,60" />
+            <path class="ai-pulse-line" d="M70,90 L60,200" />
+            <path class="ai-pulse-line" d="M200,60 L330,100" />
+            <path class="ai-pulse-line" d="M200,60 L200,170" />
+            <path class="ai-pulse-line" d="M60,200 L200,170" />
+            <path class="ai-pulse-line" d="M200,170 L330,100" />
+            <path class="ai-pulse-line" d="M60,200 L120,280" />
+            <path class="ai-pulse-line" d="M200,170 L120,280" />
+            <path class="ai-pulse-line" d="M200,170 L300,270" />
+            <path class="ai-pulse-line" d="M330,100 L300,270" />
+            <path class="ai-pulse-line" d="M120,280 L300,270" />
+          </g>
+          <g fill="var(--cyan-500)">
+            <circle class="ai-node n1" cx="70" cy="90" r="5" />
+            <circle class="ai-node n2" cx="200" cy="60" r="5" />
+            <circle class="ai-node n3" cx="330" cy="100" r="5" />
+            <circle class="ai-node n4" cx="60" cy="200" r="5" />
+            <circle class="ai-node n5" cx="200" cy="170" r="6" />
+            <circle class="ai-node n6" cx="120" cy="280" r="5" />
+            <circle class="ai-node n7" cx="300" cy="270" r="5" />
+            <circle class="ai-node n8" cx="200" cy="170" r="12" fill-opacity="0.12" />
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="about-values">
+      <div class="about-value fade-in">
+        <div class="about-value-icon">🎯</div>
+        <div class="about-value-title">Precision</div>
+        <div class="about-value-desc">Every fix, every hire — matched to the exact problem, not the nearest generic solution.</div>
+      </div>
+      <div class="about-value fade-in" style="transition-delay:0.08s">
+        <div class="about-value-icon">⚡</div>
+        <div class="about-value-title">Speed</div>
+        <div class="about-value-desc">AI-assisted triage and matching means we act in minutes and hours, not days.</div>
+      </div>
+      <div class="about-value fade-in" style="transition-delay:0.16s">
+        <div class="about-value-icon">🤝</div>
+        <div class="about-value-title">Partnership</div>
+        <div class="about-value-desc">We embed with your team rather than ticket-queue you. Long relationships, not one-off jobs.</div>
       </div>
     </div>
   </div>
@@ -1608,7 +1994,7 @@
       <p class="section-desc" style="margin:0 auto;">Two clear paths. One outcome: your organisation operating at its full potential.</p>
     </div>
     <div class="paths-grid">
-      <div class="path-card fade-in">
+      <div class="path-card hover-lift fade-in">
         <div class="path-card-num">01</div>
         <div class="path-card-badge">Technical Support</div>
         <h3 class="path-card-title">I need technical help</h3>
@@ -1622,7 +2008,7 @@
         </ul>
         <a href="#" class="btn-glow">Request Support</a>
       </div>
-      <div class="path-card fade-in" style="transition-delay:0.15s">
+      <div class="path-card hover-lift fade-in" style="transition-delay:0.15s">
         <div class="path-card-num">02</div>
         <div class="path-card-badge">Talent Acquisition</div>
         <h3 class="path-card-title">I'm looking for my next hire</h3>
@@ -1690,13 +2076,13 @@
       <p class="section-desc">World-class engineers, security experts, and talent specialists — united by a commitment to excellence and innovation.</p>
     </div>
     <div class="team-grid">
-      <div class="team-card fade-in">
+      <div class="team-card hover-lift fade-in">
         <div class="team-avatar">SC</div>
         <div class="team-name">Subhashish Choudhury</div>
         <div class="team-role">Chief Executive</div>
         <div class="team-bio">15 years in enterprise IT. Former Head of Infrastructure at Barclays. Drives Arcpyx's AI-first vision.</div>
       </div>
-      <div class="team-card fade-in" style="transition-delay:0.1s">
+      <div class="team-card hover-lift fade-in" style="transition-delay:0.1s">
         <div class="team-avatar">PS</div>
         <div class="team-name">Priya Singh</div>
         <div class="team-role">Talent Director</div>
@@ -1714,7 +2100,7 @@
       <h2 class="section-title">What Our Clients Say</h2>
     </div>
     <div class="testimonials-grid">
-      <div class="testimonial-card fade-in">
+      <div class="testimonial-card hover-lift fade-in">
         <div class="testimonial-rating">
           <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
         </div>
@@ -1727,7 +2113,7 @@
           </div>
         </div>
       </div>
-      <div class="testimonial-card fade-in" style="transition-delay:0.1s">
+      <div class="testimonial-card hover-lift fade-in" style="transition-delay:0.1s">
         <div class="testimonial-rating">
           <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
         </div>
@@ -1740,7 +2126,7 @@
           </div>
         </div>
       </div>
-      <div class="testimonial-card fade-in" style="transition-delay:0.2s">
+      <div class="testimonial-card hover-lift fade-in" style="transition-delay:0.2s">
         <div class="testimonial-rating">
           <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
         </div>
@@ -1797,7 +2183,7 @@
       <p class="section-desc">Perspectives from the frontline of enterprise technology — written by engineers who live this every day.</p>
     </div>
     <div class="blog-grid">
-      <div class="blog-card fade-in">
+      <div class="blog-card hover-lift fade-in">
         <div class="blog-card-img">🤖</div>
         <div class="blog-card-content">
           <div class="blog-card-cat">AI & Automation</div>
@@ -1810,7 +2196,7 @@
           </div>
         </div>
       </div>
-      <div class="blog-card fade-in" style="transition-delay:0.1s">
+      <div class="blog-card hover-lift fade-in" style="transition-delay:0.1s">
         <div class="blog-card-img">🔐</div>
         <div class="blog-card-content">
           <div class="blog-card-cat">Security</div>
@@ -1823,7 +2209,7 @@
           </div>
         </div>
       </div>
-      <div class="blog-card fade-in" style="transition-delay:0.2s">
+      <div class="blog-card hover-lift fade-in" style="transition-delay:0.2s">
         <div class="blog-card-img">🌐</div>
         <div class="blog-card-content">
           <div class="blog-card-cat">Talent & Culture</div>
@@ -1856,6 +2242,75 @@
   </div>
 </section>
 
+<!-- ====== CONTACT ====== -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-label">Get In Touch</div>
+      <h2 class="section-title">Contact Us</h2>
+      <p class="section-desc">Tell us what's broken or who you're looking to hire — a real person on our team will get back to you, usually within a few hours.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info-card fade-in">
+        <div class="contact-info-title">Let's talk</div>
+        <p class="contact-info-desc">Whether it's an urgent infrastructure issue or your next critical hire, reach us directly through any of the channels below.</p>
+
+        <div class="contact-item">
+          <div class="contact-item-icon">✉</div>
+          <div>
+            <div class="contact-item-label">Email</div>
+            <a class="contact-item-value" href="mailto:ricky33347@gmail.com">ricky33347@gmail.com</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">☎</div>
+          <div>
+            <div class="contact-item-label">Phone</div>
+            <a class="contact-item-value" href="tel:+919867011048">+91 98670 11048</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <div>
+            <div class="contact-item-label">Address</div>
+            <span class="contact-item-value">Mumbai, India</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">🕐</div>
+          <div>
+            <div class="contact-item-label">Hours</div>
+            <span class="contact-item-value">24/7 support · Mon–Sat sales & recruitment</span>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form fade-in" style="transition-delay:0.1s" id="contact-form" onsubmit="handleContactSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="cf-name">Name</label>
+            <input class="form-input" id="cf-name" type="text" placeholder="Your full name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cf-email">Email</label>
+            <input class="form-input" id="cf-email" type="email" placeholder="you@company.com" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="cf-subject">Subject</label>
+          <input class="form-input" id="cf-subject" type="text" placeholder="What's this about?" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="cf-message">Message</label>
+          <textarea class="form-textarea" id="cf-message" placeholder="Tell us a bit more..." required></textarea>
+        </div>
+        <button class="form-submit-btn" type="submit" id="cf-submit-btn">Send Message</button>
+        <div class="form-success" id="cf-success">✓ Thanks — we'll be in touch shortly.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
 <!-- ====== FOOTER ====== -->
 <footer>
   <div class="container">
@@ -1863,6 +2318,10 @@
       <div class="footer-brand">
         <span class="footer-logo">ARCPYX</span>
         <p class="footer-tagline">Boutique IT support and technical recruitment. AI-augmented. Human-led. Built for the organisations that can't afford to stand still.</p>
+        <p class="footer-tagline" style="margin-top:1rem;">
+          <a href="mailto:ricky33347@gmail.com" style="color:var(--text-secondary);text-decoration:none;">ricky33347@gmail.com</a><br>
+          <a href="tel:+919867011048" style="color:var(--text-secondary);text-decoration:none;">+91 98670 11048</a>
+        </p>
       </div>
       <div>
         <div class="footer-heading">Services</div>
@@ -1887,17 +2346,17 @@
       <div>
         <div class="footer-heading">Company</div>
         <ul class="footer-links">
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">The Team</a></li>
-          <li><a href="#">Case Studies</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#team">The Team</a></li>
+          <li><a href="#testimonials">Case Studies</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <div class="footer-copy">© 2025 Arcpyx IT Solutions Ltd · All rights reserved</div>
-      <div class="footer-copy">London · Manchester · Edinburgh · Dublin</div>
+      <div class="footer-copy">Mumbai, India</div>
     </div>
   </div>
 </footer>
@@ -1946,7 +2405,7 @@
     });
 
     list.innerHTML = filtered.length ? filtered.map(j => `
-      <div class="job-card">
+      <div class="job-card hover-lift">
         <div class="job-card-info">
           <div class="job-card-title">${j.title}</div>
           <div class="job-card-meta">
@@ -2025,6 +2484,26 @@
   }, { threshold: 0.1 });
 
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // ====== CONTACT FORM ======
+  function handleContactSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('cf-submit-btn');
+    const success = document.getElementById('cf-success');
+    const form = document.getElementById('contact-form');
+
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    // Simulated send — swap this for a real endpoint/integration when ready
+    setTimeout(() => {
+      btn.textContent = 'Send Message';
+      btn.disabled = false;
+      success.classList.add('visible');
+      form.reset();
+      setTimeout(() => success.classList.remove('visible'), 5000);
+    }, 700);
+  }
 
   // ====== NAV SCROLL EFFECT ======
   window.addEventListener('scroll', () => {
