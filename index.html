@@ -8,54 +8,54 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --navy-900: #020817;
-    --navy-800: #040f26;
-    --navy-700: #071433;
-    --navy-600: #0d1f4a;
-    --navy-500: #112559;
-    --cyan-500: #00e5ff;
-    --cyan-400: #33eaff;
-    --cyan-300: #66eeff;
-    --cyan-200: #99f3ff;
-    --cyan-glow: 0 0 20px rgba(0,229,255,0.4), 0 0 40px rgba(0,229,255,0.2);
-    --cyan-glow-sm: 0 0 10px rgba(0,229,255,0.3);
-    --glass-bg: rgba(7,20,51,0.6);
-    --glass-border: rgba(0,229,255,0.15);
-    --glass-border-hover: rgba(0,229,255,0.4);
+    --navy-900: #0a0a16;
+    --navy-800: #130f28;
+    --navy-700: #1c1638;
+    --navy-600: #2a1f4d;
+    --navy-500: #3a2a66;
+    --cyan-500: #b565ff;
+    --cyan-400: #c988ff;
+    --cyan-300: #dcb0ff;
+    --cyan-200: #eccbff;
+    --cyan-glow: 0 0 20px rgba(181,101,255,0.4), 0 0 40px rgba(181,101,255,0.2);
+    --cyan-glow-sm: 0 0 10px rgba(181,101,255,0.3);
+    --glass-bg: rgba(28,22,56,0.6);
+    --glass-border: rgba(181,101,255,0.15);
+    --glass-border-hover: rgba(181,101,255,0.4);
     --text-primary: #e8f4f8;
     --text-secondary: rgba(232,244,248,0.65);
     --text-muted: rgba(232,244,248,0.35);
     --font-main: 'Montserrat', sans-serif;
     --font-mono: 'Space Mono', monospace;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --body-bg: #020817;
-    --card-bg: #040f26;
-    --grid-line: rgba(0,229,255,0.03);
+    --body-bg: #0a0a16;
+    --card-bg: #130f28;
+    --grid-line: rgba(181,101,255,0.03);
     --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
     --spring-soft: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   body.light-mode {
-    --navy-900: #f0f7ff;
-    --navy-800: #e2eef9;
-    --navy-700: #d4e5f5;
-    --navy-600: #c0d7ef;
-    --navy-500: #a8c8e8;
-    --cyan-500: #0077aa;
-    --cyan-400: #0088bb;
-    --cyan-300: #0099cc;
-    --cyan-200: #00aadd;
-    --cyan-glow: 0 0 20px rgba(0,119,170,0.25), 0 0 40px rgba(0,119,170,0.12);
-    --cyan-glow-sm: 0 0 10px rgba(0,119,170,0.2);
-    --glass-bg: rgba(220,235,250,0.7);
-    --glass-border: rgba(0,119,170,0.18);
-    --glass-border-hover: rgba(0,119,170,0.4);
+    --navy-900: #f7f2ff;
+    --navy-800: #ede0fb;
+    --navy-700: #e2d0f7;
+    --navy-600: #d4baf2;
+    --navy-500: #c29ded;
+    --cyan-500: #7c3aed;
+    --cyan-400: #8b5cf6;
+    --cyan-300: #a78bfa;
+    --cyan-200: #c4b5fd;
+    --cyan-glow: 0 0 20px rgba(124,58,237,0.25), 0 0 40px rgba(124,58,237,0.12);
+    --cyan-glow-sm: 0 0 10px rgba(124,58,237,0.2);
+    --glass-bg: rgba(226,208,247,0.7);
+    --glass-border: rgba(124,58,237,0.18);
+    --glass-border-hover: rgba(124,58,237,0.4);
     --text-primary: #0a1628;
     --text-secondary: rgba(10,22,40,0.65);
     --text-muted: rgba(10,22,40,0.38);
-    --body-bg: #f0f7ff;
-    --card-bg: #e2eef9;
-    --grid-line: rgba(0,119,170,0.04);
+    --body-bg: #f7f2ff;
+    --card-bg: #ede0fb;
+    --grid-line: rgba(124,58,237,0.04);
   }
 
   /* Theme toggle button */
@@ -110,7 +110,7 @@
   .ambient-left {
     position: fixed;
     width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(0,229,255,0.06) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(181,101,255,0.06) 0%, transparent 70%);
     top: -100px; left: -100px;
     pointer-events: none;
     z-index: 0;
@@ -118,7 +118,7 @@
   .ambient-right {
     position: fixed;
     width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(0,100,255,0.05) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(236,72,153,0.05) 0%, transparent 70%);
     bottom: 0; right: -100px;
     pointer-events: none;
     z-index: 0;
@@ -131,7 +131,7 @@
     z-index: 1000;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    background: rgba(2,8,23,0.85);
+    background: rgba(10,10,22,0.85);
     border-bottom: 1px solid var(--glass-border);
     padding: 0 2rem;
     height: 72px;
@@ -195,13 +195,13 @@
     position: absolute;
     top: 0; left: -100%;
     width: 100%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0,229,255,0.15), transparent);
+    background: linear-gradient(90deg, transparent, rgba(181,101,255,0.15), transparent);
     transition: left 0.5s ease;
   }
 
   .btn-glow:hover::before { left: 100%; }
   .btn-glow:hover {
-    background: rgba(0,229,255,0.1);
+    background: rgba(181,101,255,0.1);
     box-shadow: var(--cyan-glow);
     color: #fff;
   }
@@ -245,6 +245,24 @@
     display: flex;
     align-items: stretch;
     padding-top: 72px;
+    overflow: hidden;
+  }
+
+  #hero-fracture-host {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    background: #0a0a16;
+  }
+
+  #hero-fracture-host canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
   }
 
   .hero-split {
@@ -252,6 +270,8 @@
     grid-template-columns: 1fr 1fr;
     min-height: calc(100vh - 72px);
     width: 100%;
+    position: relative;
+    z-index: 1;
   }
 
   .hero-panel {
@@ -265,18 +285,33 @@
 
   .hero-panel-left {
     border-right: 1px solid var(--glass-border);
-    background: linear-gradient(135deg, rgba(0,229,255,0.03) 0%, transparent 60%);
+    background:
+      linear-gradient(135deg, rgba(181,101,255,0.06) 0%, transparent 60%),
+      linear-gradient(180deg, rgba(10,10,22,0.32) 0%, rgba(10,10,22,0.5) 100%);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
   }
 
   .hero-panel-right {
-    background: linear-gradient(225deg, rgba(0,100,255,0.04) 0%, transparent 60%);
+    background:
+      linear-gradient(225deg, rgba(236,72,153,0.07) 0%, transparent 60%),
+      linear-gradient(180deg, rgba(10,10,22,0.32) 0%, rgba(10,10,22,0.5) 100%);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+  }
+
+  body.light-mode .hero-panel-left,
+  body.light-mode .hero-panel-right {
+    background:
+      linear-gradient(135deg, rgba(181,101,255,0.06) 0%, transparent 60%),
+      linear-gradient(180deg, rgba(247,242,255,0.55) 0%, rgba(247,242,255,0.72) 100%);
   }
 
   .hero-badge {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: rgba(0,229,255,0.08);
+    background: rgba(181,101,255,0.08);
     border: 1px solid var(--glass-border);
     padding: 0.35rem 0.9rem;
     font-size: 0.7rem;
@@ -417,15 +452,15 @@
 
   .sh-bar-bg {
     height: 3px;
-    background: rgba(0,229,255,0.1);
+    background: rgba(181,101,255,0.1);
     width: 100%;
     overflow: hidden;
   }
 
   .sh-bar-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--cyan-500), #0066ff);
-    box-shadow: 0 0 6px rgba(0,229,255,0.5);
+    background: linear-gradient(90deg, var(--cyan-500), #ec4899);
+    box-shadow: 0 0 6px rgba(181,101,255,0.5);
     transition: width 1.5s cubic-bezier(0.4,0,0.2,1);
     animation: bar-animate 3s ease-in-out infinite alternate;
   }
@@ -464,7 +499,7 @@
 
   .tm-tag {
     padding: 0.25rem 0.7rem;
-    background: rgba(0,229,255,0.05);
+    background: rgba(181,101,255,0.05);
     border: 1px solid var(--glass-border);
     font-size: 0.65rem;
     font-weight: 700;
@@ -477,7 +512,7 @@
   }
 
   .tm-tag.active, .tm-tag:hover {
-    background: rgba(0,229,255,0.15);
+    background: rgba(181,101,255,0.15);
     border-color: var(--cyan-500);
     color: var(--cyan-500);
     box-shadow: var(--cyan-glow-sm);
@@ -504,14 +539,14 @@
 
   .tm-match-bg {
     height: 4px;
-    background: rgba(0,229,255,0.1);
+    background: rgba(181,101,255,0.1);
     overflow: hidden;
   }
 
   .tm-match-fill {
     height: 100%;
-    background: linear-gradient(90deg, #0066ff, var(--cyan-500));
-    box-shadow: 0 0 8px rgba(0,229,255,0.4);
+    background: linear-gradient(90deg, #ec4899, var(--cyan-500));
+    box-shadow: 0 0 8px rgba(181,101,255,0.4);
     transition: width 0.8s cubic-bezier(0.4,0,0.2,1);
   }
 
@@ -590,7 +625,7 @@
   .service-card:hover::before { transform: scaleX(1); }
 
   .service-card:hover {
-    background: rgba(0,229,255,0.04);
+    background: rgba(181,101,255,0.04);
   }
 
   .service-card-icon {
@@ -653,7 +688,7 @@
   /* ====== HOW WE HELP ====== */
   #how-we-help {
     padding: 7rem 0;
-    background: linear-gradient(180deg, transparent, rgba(0,229,255,0.02), transparent);
+    background: linear-gradient(180deg, transparent, rgba(181,101,255,0.02), transparent);
   }
 
   .paths-grid {
@@ -672,13 +707,13 @@
     transition: var(--transition);
   }
 
-  .path-card:hover { background: rgba(0,229,255,0.03); }
+  .path-card:hover { background: rgba(181,101,255,0.03); }
 
   .path-card-num {
     font-size: 5rem;
     font-weight: 900;
     font-family: var(--font-mono);
-    color: rgba(0,229,255,0.06);
+    color: rgba(181,101,255,0.06);
     position: absolute;
     top: 1rem; right: 2rem;
     line-height: 1;
@@ -687,7 +722,7 @@
 
   .path-card-badge {
     display: inline-block;
-    background: rgba(0,229,255,0.08);
+    background: rgba(181,101,255,0.08);
     border: 1px solid var(--glass-border);
     padding: 0.3rem 0.8rem;
     font-size: 0.65rem;
@@ -725,7 +760,7 @@
     align-items: flex-start;
     gap: 0.75rem;
     padding: 0.6rem 0;
-    border-bottom: 1px solid rgba(0,229,255,0.05);
+    border-bottom: 1px solid rgba(181,101,255,0.05);
     font-size: 0.85rem;
     color: var(--text-secondary);
   }
@@ -824,7 +859,7 @@
   }
 
   .job-filter.active, .job-filter:hover {
-    background: rgba(0,229,255,0.1);
+    background: rgba(181,101,255,0.1);
     border-color: var(--cyan-500);
     color: var(--cyan-500);
   }
@@ -857,7 +892,7 @@
 
   .job-card:hover::before { transform: scaleY(1); }
   .job-card:hover {
-    background: rgba(0,229,255,0.04);
+    background: rgba(181,101,255,0.04);
     border-color: var(--glass-border);
   }
 
@@ -887,8 +922,8 @@
 
   .job-tag {
     padding: 0.2rem 0.6rem;
-    background: rgba(0,229,255,0.05);
-    border: 1px solid rgba(0,229,255,0.1);
+    background: rgba(181,101,255,0.05);
+    border: 1px solid rgba(181,101,255,0.1);
     font-size: 0.6rem;
     font-weight: 700;
     letter-spacing: 0.08em;
@@ -953,14 +988,14 @@
     overflow: hidden;
   }
 
-  .team-card:hover { background: rgba(0,229,255,0.03); }
+  .team-card:hover { background: rgba(181,101,255,0.03); }
 
   .team-card::after {
     content: '';
     position: absolute;
     bottom: 0; left: 0; right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(0,229,255,0.3), transparent);
+    background: linear-gradient(90deg, transparent, rgba(181,101,255,0.3), transparent);
     transform: scaleX(0);
     transition: transform 0.4s ease;
   }
@@ -978,7 +1013,7 @@
     font-size: 1.5rem;
     font-weight: 800;
     color: var(--cyan-500);
-    background: rgba(0,229,255,0.05);
+    background: rgba(181,101,255,0.05);
     letter-spacing: -0.02em;
     transition: var(--transition);
   }
@@ -1034,7 +1069,7 @@
     content: '"';
     font-size: 5rem;
     font-weight: 900;
-    color: rgba(0,229,255,0.07);
+    color: rgba(181,101,255,0.07);
     position: absolute;
     top: 1rem; right: 1.5rem;
     line-height: 1;
@@ -1067,7 +1102,7 @@
   .testimonial-avatar {
     width: 40px; height: 40px;
     border-radius: 50%;
-    background: rgba(0,229,255,0.08);
+    background: rgba(181,101,255,0.08);
     border: 1px solid var(--glass-border);
     display: flex;
     align-items: center;
@@ -1160,11 +1195,11 @@
     overflow: hidden;
   }
 
-  .blog-card:hover { background: rgba(0,229,255,0.03); }
+  .blog-card:hover { background: rgba(181,101,255,0.03); }
 
   .blog-card-img {
     height: 160px;
-    background: linear-gradient(135deg, rgba(0,229,255,0.05) 0%, rgba(0,100,255,0.08) 100%);
+    background: linear-gradient(135deg, rgba(181,101,255,0.05) 0%, rgba(236,72,153,0.08) 100%);
     border-bottom: 1px solid var(--glass-border);
     display: flex;
     align-items: center;
@@ -1182,8 +1217,8 @@
       45deg,
       transparent,
       transparent 10px,
-      rgba(0,229,255,0.02) 10px,
-      rgba(0,229,255,0.02) 20px
+      rgba(181,101,255,0.02) 10px,
+      rgba(181,101,255,0.02) 20px
     );
   }
 
@@ -1238,7 +1273,7 @@
     transform: translate(-50%, -50%);
     width: 600px;
     height: 300px;
-    background: radial-gradient(ellipse, rgba(0,229,255,0.06) 0%, transparent 70%);
+    background: radial-gradient(ellipse, rgba(181,101,255,0.06) 0%, transparent 70%);
     pointer-events: none;
   }
 
@@ -1343,7 +1378,7 @@
   /* ====== ABOUT ====== */
   #about {
     padding: 7rem 0;
-    background: linear-gradient(180deg, transparent, rgba(0,229,255,0.02), transparent);
+    background: linear-gradient(180deg, transparent, rgba(181,101,255,0.02), transparent);
   }
 
   .about-grid {
@@ -1383,7 +1418,7 @@
     transition: transform 0.35s var(--spring), background 0.3s ease;
   }
 
-  .about-value:hover { transform: translateY(-4px); background: rgba(0,229,255,0.04); }
+  .about-value:hover { transform: translateY(-4px); background: rgba(181,101,255,0.04); }
 
   .about-value-icon { font-size: 1.3rem; margin-bottom: 0.6rem; }
 
@@ -1661,7 +1696,7 @@
   }
   .hover-lift:hover {
     transform: translateY(-6px);
-    box-shadow: 0 18px 40px -20px rgba(0,229,255,0.25);
+    box-shadow: 0 18px 40px -20px rgba(181,101,255,0.25);
   }
   .hover-lift:active { transform: translateY(-2px) scale(0.99); }
 
@@ -1674,8 +1709,8 @@
   /* Glitch effect on hero */
   @keyframes glitch {
     0%, 90%, 100% { text-shadow: none; }
-    92% { text-shadow: -2px 0 var(--cyan-500), 2px 0 #ff004f; }
-    94% { text-shadow: 2px 0 var(--cyan-500), -2px 0 #ff004f; }
+    92% { text-shadow: -2px 0 var(--cyan-500), 2px 0 #3b82f6; }
+    94% { text-shadow: 2px 0 var(--cyan-500), -2px 0 #3b82f6; }
     96% { text-shadow: none; }
   }
 
@@ -1748,6 +1783,7 @@
 
 <!-- ====== HERO ====== -->
 <section id="hero">
+  <div id="hero-fracture-host" aria-hidden="true"></div>
   <div class="hero-split">
 
     <!-- LEFT: Support -->
@@ -1799,7 +1835,7 @@
             <span class="sh-metric-name">Avg Response Time</span>
             <span class="sh-metric-val" id="metric-resp">3.2 min</span>
           </div>
-          <div class="sh-bar-bg"><div class="sh-bar-fill" style="width:85%;background:linear-gradient(90deg,#00ff88,#00e5ff);animation-delay:0.9s"></div></div>
+          <div class="sh-bar-bg"><div class="sh-bar-fill" style="width:85%;background:linear-gradient(90deg,#00ff88,#b565ff);animation-delay:0.9s"></div></div>
         </div>
       </div>
 
@@ -2573,11 +2609,519 @@
     const nav = document.querySelector('nav');
     const isLight = document.body.classList.contains('light-mode');
     if (window.scrollY > 50) {
-      nav.style.background = isLight ? 'rgba(240,247,255,0.97)' : 'rgba(2,8,23,0.97)';
+      nav.style.background = isLight ? 'rgba(247,242,255,0.97)' : 'rgba(10,10,22,0.97)';
     } else {
-      nav.style.background = isLight ? 'rgba(240,247,255,0.85)' : 'rgba(2,8,23,0.85)';
+      nav.style.background = isLight ? 'rgba(247,242,255,0.85)' : 'rgba(10,10,22,0.85)';
     }
   });
+</script>
+
+<!-- ====== FRACTURE GLASS HERO BACKGROUND ====== -->
+<!-- Ported from a React/three.js component to plain JS + a CDN build of three.js,
+     since this page has no build step. Behaviour matches the original: a frosted
+     glass pane made of ~35 Voronoi shards that lifts/tilts/refracts near the cursor,
+     revealing a deep violet→pink→indigo layer underneath, then re-seals. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function () {
+  const host = document.getElementById('hero-fracture-host');
+  if (!host || typeof THREE === 'undefined') return;
+
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const SHARD_VERT = `
+    attribute vec2 aUv;
+    attribute float aEdge;
+    varying vec2 vUv;
+    varying float vEdge;
+    varying vec3 vNormalV;
+    varying vec3 vViewDir;
+    void main() {
+      vUv = aUv;
+      vEdge = aEdge;
+      vec4 mv = modelViewMatrix * vec4(position, 1.0);
+      vNormalV = normalMatrix * normal;
+      vViewDir = -mv.xyz;
+      gl_Position = projectionMatrix * mv;
+    }
+  `;
+
+  const SHARD_FRAG = `
+    precision highp float;
+    varying vec2 vUv;
+    varying float vEdge;
+    varying vec3 vNormalV;
+    varying vec3 vViewDir;
+    uniform sampler2D uFront;
+    uniform sampler2D uBack;
+    uniform float uOpen;
+    uniform float uReveal;
+
+    void main() {
+      vec3 N = normalize(vNormalV);
+      vec3 V = normalize(vViewDir);
+      float open = clamp(uOpen, 0.0, 1.0);
+      float o = smoothstep(0.0, 1.0, open);
+
+      vec2 off = N.xy * (0.010 + 0.060 * open);
+      vec2 caDir = normalize(N.xy + vec2(1e-4));
+      float ca = 0.004 + 0.016 * open;
+      vec3 back;
+      back.r = texture2D(uBack, vUv + off + caDir * ca).r;
+      back.g = texture2D(uBack, vUv + off).g;
+      back.b = texture2D(uBack, vUv + off - caDir * ca).b;
+
+      vec3 front = texture2D(uFront, vUv).rgb;
+      vec3 base = mix(front, back, o);
+
+      float fres = pow(1.0 - max(dot(N, V), 0.0), 3.0);
+      float bevel = smoothstep(0.0, 0.40, 1.0 - vEdge);
+      vec3 L = normalize(vec3(-0.5, 0.7, 0.75));
+      vec3 H = normalize(L + V);
+      float spec = pow(max(dot(N, H), 0.0), 42.0);
+
+      vec3 col = base;
+      col += fres * (0.10 + 0.10 * (1.0 - open)) * vec3(0.82, 0.90, 1.0);
+      col += bevel * (0.05 + 0.18 * open) * vec3(1.0);
+      col += spec * (0.30 + 0.45 * open);
+      col -= bevel * (1.0 - open) * 0.17;
+      col = mix(col, col * 1.03 + 0.015, uReveal);
+
+      gl_FragColor = vec4(col, 1.0);
+    }
+  `;
+
+  const BACK_VERT = `
+    attribute vec2 aUv;
+    varying vec2 vUv;
+    void main() {
+      vUv = aUv;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `;
+
+  const BACK_FRAG = `
+    precision highp float;
+    varying vec2 vUv;
+    uniform sampler2D uBack;
+    void main() {
+      vec3 c = texture2D(uBack, vUv).rgb;
+      vec2 q = vUv - 0.5;
+      float vig = 1.0 - dot(q, q) * 0.55;
+      gl_FragColor = vec4(c * vig, 1.0);
+    }
+  `;
+
+  // Clip a convex polygon by the half-plane on seed s's side of the s/n bisector.
+  function clipHalfPlane(poly, sx, sy, nx, ny) {
+    const ax = sx - nx;
+    const ay = sy - ny;
+    const mx = (sx + nx) / 2;
+    const my = (sy + ny) / 2;
+    const inside = (p) => (p.x - mx) * ax + (p.y - my) * ay >= 0;
+    const out = [];
+    for (let i = 0; i < poly.length; i++) {
+      const cur = poly[i];
+      const prev = poly[(i + poly.length - 1) % poly.length];
+      const curIn = inside(cur);
+      const prevIn = inside(prev);
+      if (curIn !== prevIn) {
+        const dx = cur.x - prev.x;
+        const dy = cur.y - prev.y;
+        const denom = dx * ax + dy * ay;
+        if (Math.abs(denom) > 1e-9) {
+          const t = ((mx - prev.x) * ax + (my - prev.y) * ay) / denom;
+          out.push({ x: prev.x + t * dx, y: prev.y + t * dy });
+        }
+      }
+      if (curIn) out.push(cur);
+    }
+    return out;
+  }
+
+  // ── renderer + scene ──────────────────────────────────────────────────
+  const canvas = document.createElement('canvas');
+  host.appendChild(canvas);
+
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.setClearColor(0x0a0a16, 1);
+
+  const scene = new THREE.Scene();
+  const FOV = 40;
+  const CAM_Z = 10;
+  const camera = new THREE.PerspectiveCamera(FOV, 1, 0.1, 100);
+  camera.position.set(0, 0, CAM_Z);
+  camera.lookAt(0, 0, 0);
+
+  let halfH = CAM_Z * Math.tan((FOV / 2) * (Math.PI / 180));
+  let halfW = halfH;
+
+  const frontCanvas = document.createElement('canvas');
+  const backCanvas = document.createElement('canvas');
+  const frontTex = new THREE.CanvasTexture(frontCanvas);
+  const backTex = new THREE.CanvasTexture(backCanvas);
+  [frontTex, backTex].forEach((tx) => {
+    tx.flipY = false;
+    tx.minFilter = THREE.LinearFilter;
+    tx.magFilter = THREE.LinearFilter;
+    tx.generateMipmaps = false;
+  });
+
+  const sharedUniforms = {
+    uFront: { value: frontTex },
+    uBack: { value: backTex },
+    uReveal: { value: 0 },
+  };
+
+  const backUniforms = { uBack: { value: backTex } };
+  const backMat = new THREE.ShaderMaterial({ vertexShader: BACK_VERT, fragmentShader: BACK_FRAG, uniforms: backUniforms });
+  const backGeo = new THREE.BufferGeometry();
+  const backMesh = new THREE.Mesh(backGeo, backMat);
+  backMesh.position.z = -0.02;
+  scene.add(backMesh);
+
+  function buildBackQuad() {
+    const X = halfW * 1.06;
+    const Y = halfH * 1.06;
+    const pos = new Float32Array([-X, -Y, 0, X, -Y, 0, X, Y, 0, -X, Y, 0]);
+    const uv = new Float32Array([
+      0.5 - X / (2 * halfW), 0.5 + Y / (2 * halfH),
+      0.5 + X / (2 * halfW), 0.5 + Y / (2 * halfH),
+      0.5 + X / (2 * halfW), 0.5 - Y / (2 * halfH),
+      0.5 - X / (2 * halfW), 0.5 - Y / (2 * halfH),
+    ]);
+    backGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    backGeo.setAttribute('aUv', new THREE.BufferAttribute(uv, 2));
+    backGeo.setIndex([0, 1, 2, 0, 2, 3]);
+  }
+
+  let shards = [];
+
+  function disposeShards() {
+    for (const s of shards) {
+      scene.remove(s.mesh);
+      s.mesh.geometry.dispose();
+      s.mat.dispose();
+    }
+    shards = [];
+  }
+
+  function buildShards() {
+    disposeShards();
+    const X = halfW * 1.06;
+    const Y = halfH * 1.06;
+
+    const aspect = halfW / halfH;
+    const cols = Math.max(4, Math.round(6 * Math.sqrt(aspect)));
+    const rows = Math.max(4, Math.round(6 / Math.sqrt(aspect)));
+    const seeds = [];
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const jx = (Math.random() - 0.5) * 0.9;
+        const jy = (Math.random() - 0.5) * 0.9;
+        seeds.push({
+          x: (-X) + ((c + 0.5 + jx) / cols) * 2 * X,
+          y: (-Y) + ((r + 0.5 + jy) / rows) * 2 * Y,
+        });
+      }
+    }
+
+    const rect = [{ x: -X, y: -Y }, { x: X, y: -Y }, { x: X, y: Y }, { x: -X, y: Y }];
+
+    for (let i = 0; i < seeds.length; i++) {
+      const s = seeds[i];
+      let cell = rect;
+      for (let j = 0; j < seeds.length && cell.length >= 3; j++) {
+        if (j === i) continue;
+        cell = clipHalfPlane(cell, s.x, s.y, seeds[j].x, seeds[j].y);
+      }
+      if (cell.length < 3) continue;
+
+      let cxw = 0, cyw = 0;
+      for (const p of cell) { cxw += p.x; cyw += p.y; }
+      cxw /= cell.length; cyw /= cell.length;
+
+      const n = cell.length;
+      const positions = new Float32Array((n + 1) * 3);
+      const uvs = new Float32Array((n + 1) * 2);
+      const edges = new Float32Array(n + 1);
+      positions[0] = 0; positions[1] = 0; positions[2] = 0;
+      uvs[0] = 0.5 + cxw / (2 * halfW);
+      uvs[1] = 0.5 - cyw / (2 * halfH);
+      edges[0] = 1;
+      for (let k = 0; k < n; k++) {
+        const p = cell[k];
+        positions[(k + 1) * 3] = p.x - cxw;
+        positions[(k + 1) * 3 + 1] = p.y - cyw;
+        positions[(k + 1) * 3 + 2] = 0;
+        uvs[(k + 1) * 2] = 0.5 + p.x / (2 * halfW);
+        uvs[(k + 1) * 2 + 1] = 0.5 - p.y / (2 * halfH);
+        edges[k + 1] = 0;
+      }
+      const normals = new Float32Array((n + 1) * 3);
+      for (let k = 0; k <= n; k++) normals[k * 3 + 2] = 1;
+      const index = [];
+      for (let k = 0; k < n; k++) index.push(0, k + 1, ((k + 1) % n) + 1);
+
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      geo.setAttribute('normal', new THREE.BufferAttribute(normals, 3));
+      geo.setAttribute('aUv', new THREE.BufferAttribute(uvs, 2));
+      geo.setAttribute('aEdge', new THREE.BufferAttribute(edges, 1));
+      geo.setIndex(index);
+
+      const mat = new THREE.ShaderMaterial({
+        vertexShader: SHARD_VERT,
+        fragmentShader: SHARD_FRAG,
+        uniforms: {
+          uFront: sharedUniforms.uFront,
+          uBack: sharedUniforms.uBack,
+          uReveal: sharedUniforms.uReveal,
+          uOpen: { value: 0 },
+        },
+      });
+
+      const mesh = new THREE.Mesh(geo, mat);
+      mesh.position.set(cxw, cyw, 0);
+      scene.add(mesh);
+
+      shards.push({
+        mesh, mat, cx: cxw, cy: cyw, open: 0, ov: 0,
+        spin: (Math.random() - 0.5) * 2, broken: false,
+        vx: 0, vy: 0, vz: 0, rvx: 0, rvy: 0, rvz: 0,
+      });
+    }
+  }
+
+  // Bake the two backdrop layers — a frosted ice-glass front and a deep
+  // violet→pink→indigo back, matching the site's new palette. Pure abstract
+  // gradients (no baked headline text) so it reads as a background layer.
+  function bakeLayer(cnv, kind) {
+    const ctx = cnv.getContext('2d');
+    if (!ctx) return;
+    const w = cnv.width, h = cnv.height;
+    ctx.clearRect(0, 0, w, h);
+
+    if (kind === 'front') {
+      const g = ctx.createLinearGradient(0, 0, w * 0.4, h);
+      g.addColorStop(0, '#f2f0f8');
+      g.addColorStop(0.55, '#e4def0');
+      g.addColorStop(1, '#d3c8e8');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, w, h);
+      const r = ctx.createRadialGradient(w * 0.5, h * 0.42, 0, w * 0.5, h * 0.42, h * 0.9);
+      r.addColorStop(0, 'rgba(255,255,255,0.5)');
+      r.addColorStop(1, 'rgba(220,210,235,0)');
+      ctx.fillStyle = r;
+      ctx.fillRect(0, 0, w, h);
+    } else {
+      const g = ctx.createLinearGradient(0, 0, w, h);
+      g.addColorStop(0, '#0a0a16');
+      g.addColorStop(0.42, '#2a1660');
+      g.addColorStop(0.72, '#7a1e74');
+      g.addColorStop(1, '#c43a5f');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, w, h);
+      const b1 = ctx.createRadialGradient(w * 0.7, h * 0.3, 0, w * 0.7, h * 0.3, h * 0.8);
+      b1.addColorStop(0, 'rgba(236,72,153,0.45)');
+      b1.addColorStop(1, 'rgba(236,72,153,0)');
+      ctx.fillStyle = b1;
+      ctx.fillRect(0, 0, w, h);
+      const b2 = ctx.createRadialGradient(w * 0.2, h * 0.7, 0, w * 0.2, h * 0.7, h * 0.7);
+      b2.addColorStop(0, 'rgba(150,90,255,0.4)');
+      b2.addColorStop(1, 'rgba(150,90,255,0)');
+      ctx.fillStyle = b2;
+      ctx.fillRect(0, 0, w, h);
+    }
+  }
+
+  function bakePanels() {
+    bakeLayer(frontCanvas, 'front');
+    bakeLayer(backCanvas, 'back');
+    frontTex.needsUpdate = true;
+    backTex.needsUpdate = true;
+  }
+
+  function resize() {
+    const w = host.clientWidth || window.innerWidth;
+    const h = host.clientHeight || window.innerHeight;
+    if (w < 2 || h < 2) return;
+    renderer.setSize(w, h, false);
+    const aspect = w / h;
+    camera.aspect = aspect;
+    camera.updateProjectionMatrix();
+    halfH = CAM_Z * Math.tan((FOV / 2) * (Math.PI / 180));
+    halfW = halfH * aspect;
+
+    const pr = Math.min(window.devicePixelRatio || 1, 2);
+    let tw = Math.round(w * pr);
+    let th = Math.round(h * pr);
+    const capW = 2200;
+    if (tw > capW) { th = Math.round(th * (capW / tw)); tw = capW; }
+    [frontCanvas, backCanvas].forEach((c) => { c.width = tw; c.height = th; });
+
+    buildBackQuad();
+    buildShards();
+    bakePanels();
+  }
+
+  resize();
+
+  let resizePending = false;
+  const ro = new ResizeObserver(() => {
+    if (resizePending) return;
+    resizePending = true;
+    requestAnimationFrame(() => { resizePending = false; resize(); });
+  });
+  ro.observe(host);
+
+  // ── cursor (world coords), tracked from the whole hero section so buttons
+  //    and links inside stay fully clickable (the canvas itself is
+  //    pointer-events:none) ─────────────────────────────────────────────
+  const listenTarget = document.getElementById('hero') || host;
+  const cursor = { x: 1e9, y: 1e9 };
+  let pointerInside = false;
+
+  function setCursorFromClient(clientX, clientY) {
+    const rect = host.getBoundingClientRect();
+    const u = (clientX - rect.left) / rect.width;
+    const v = (clientY - rect.top) / rect.height;
+    cursor.x = (u - 0.5) * 2 * halfW;
+    cursor.y = (0.5 - v) * 2 * halfH;
+  }
+  function onMove(e) { pointerInside = true; setCursorFromClient(e.clientX, e.clientY); }
+  function onLeave() { pointerInside = false; cursor.x = 1e9; cursor.y = 1e9; }
+
+  if (!reduced) {
+    listenTarget.addEventListener('pointermove', onMove);
+    listenTarget.addEventListener('pointerleave', onLeave);
+  }
+
+  const STIFF = 0.18, DAMP = 0.74;
+  const PREVIEW_LIFT = 0.5, PREVIEW_TILT = 0.3;
+  const GRAV = -13.0;
+  let HIDE_Y = -halfH - 3.0;
+
+  function breakShard(s, curX, curY) {
+    s.broken = true;
+    let odx = s.cx - curX, ody = s.cy - curY;
+    const od = Math.sqrt(odx * odx + ody * ody) || 1;
+    odx /= od; ody /= od;
+    s.vx = odx * (0.5 + Math.random() * 1.4);
+    s.vy = 0.7 + Math.random() * 1.2;
+    s.vz = 1.0 + Math.random() * 1.4;
+    s.rvx = (Math.random() - 0.5) * 6.5;
+    s.rvy = (Math.random() - 0.5) * 6.5;
+    s.rvz = (Math.random() - 0.5) * 5.0;
+  }
+
+  function reform() {
+    for (const s of shards) {
+      s.broken = false;
+      s.mesh.visible = true;
+      s.mesh.position.set(s.cx, s.cy, 0);
+      s.mesh.rotation.set(0, 0, 0);
+      s.vx = s.vy = s.vz = s.rvx = s.rvy = s.rvz = 0;
+      s.ov = 0;
+      s.open = 1;
+      s.mat.uniforms.uOpen.value = 1;
+    }
+  }
+
+  if (reduced) {
+    shards.forEach((s) => {
+      const fallen = s.cy < -halfH * 0.4 && s.cx > halfW * 0.2;
+      if (fallen) { s.mesh.visible = false; }
+      else { s.open = 0; s.mat.uniforms.uOpen.value = 0; }
+    });
+    sharedUniforms.uReveal.value = 0;
+    renderer.render(scene, camera);
+    return;
+  }
+
+  let raf = 0;
+  let tPrev = performance.now();
+  let allBrokenAt = -1;
+  let idleOut = 0;
+
+  function frame(now) {
+    const dt = Math.min(0.033, (now - tPrev) / 1000);
+    tPrev = now;
+
+    sharedUniforms.uReveal.value = Math.min(1, sharedUniforms.uReveal.value + 0.02);
+
+    const RADIUS = halfH * 1.1;
+    const BR = halfH * 0.4;
+    HIDE_Y = -halfH - 3.0;
+
+    let allBroken = true;
+
+    for (const s of shards) {
+      if (!s.broken) {
+        allBroken = false;
+        let previewOpen = 0;
+        if (pointerInside) {
+          const dx = cursor.x - s.cx, dy = cursor.y - s.cy;
+          const d = Math.sqrt(dx * dx + dy * dy);
+          if (d < BR) {
+            breakShard(s, cursor.x, cursor.y);
+          } else {
+            const t = Math.max(0, 1 - d / RADIUS);
+            previewOpen = Math.min(0.3, t * t * 0.55);
+          }
+        }
+        if (!s.broken) {
+          s.ov += (previewOpen - s.open) * STIFF;
+          s.ov *= DAMP;
+          s.open += s.ov;
+          if (s.open < 0) { s.open = 0; if (s.ov < 0) s.ov = 0; }
+          const o = s.open;
+          let odx = s.cx - cursor.x, ody = s.cy - cursor.y;
+          const od = Math.sqrt(odx * odx + ody * ody) || 1;
+          odx /= od; ody /= od;
+          s.mesh.position.set(s.cx, s.cy, o * PREVIEW_LIFT);
+          s.mesh.rotation.set(ody * o * PREVIEW_TILT, -odx * o * PREVIEW_TILT, s.spin * o * 0.1);
+          s.mat.uniforms.uOpen.value = o;
+        }
+      }
+
+      if (s.broken) {
+        s.vy += GRAV * dt;
+        s.mesh.position.x += s.vx * dt;
+        s.mesh.position.y += s.vy * dt;
+        s.mesh.position.z += s.vz * dt;
+        s.mesh.rotation.x += s.rvx * dt;
+        s.mesh.rotation.y += s.rvy * dt;
+        s.mesh.rotation.z += s.rvz * dt;
+        s.open = Math.min(1, s.open + dt * 7);
+        s.mat.uniforms.uOpen.value = s.open;
+        if (s.mesh.position.y < HIDE_Y) s.mesh.visible = false;
+        if (s.mesh.visible) allBroken = false;
+      }
+    }
+
+    const elapsed = now / 1000;
+    if (allBroken) {
+      if (allBrokenAt < 0) allBrokenAt = elapsed;
+      else if (elapsed - allBrokenAt > 1.6) { reform(); allBrokenAt = -1; }
+    } else {
+      allBrokenAt = -1;
+    }
+
+    if (!pointerInside) {
+      idleOut += dt;
+      if (idleOut > 2.5 && shards.some((s) => s.broken)) { reform(); idleOut = 0; }
+    } else {
+      idleOut = 0;
+    }
+
+    renderer.render(scene, camera);
+    raf = requestAnimationFrame(frame);
+  }
+
+  raf = requestAnimationFrame(frame);
+})();
 </script>
 </body>
 </html>
