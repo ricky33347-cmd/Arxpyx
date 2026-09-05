@@ -1438,7 +1438,9 @@
     line-height: 1.5;
   }
 
-  /* AI network visual — CSS/SVG only, no external images or packages */
+  /* Radar visual — CSS/SVG only, no external images or packages. An original
+     rotating-sweep-with-blips design (a common, non-proprietary UI pattern),
+     themed here as a live threat/talent scanning radar. */
   .ai-visual {
     position: relative;
     background: var(--glass-bg);
@@ -1466,32 +1468,35 @@
 
   .ai-visual svg { width: 100%; height: 100%; }
 
-  .ai-node { animation: ai-node-pulse 3s ease-in-out infinite; transform-origin: center; }
-  .ai-node.n1 { animation-delay: 0s; }
-  .ai-node.n2 { animation-delay: 0.4s; }
-  .ai-node.n3 { animation-delay: 0.8s; }
-  .ai-node.n4 { animation-delay: 1.2s; }
-  .ai-node.n5 { animation-delay: 1.6s; }
-  .ai-node.n6 { animation-delay: 2s; }
-  .ai-node.n7 { animation-delay: 0.6s; }
-  .ai-node.n8 { animation-delay: 1.4s; }
-
-  @keyframes ai-node-pulse {
-    0%, 100% { opacity: 0.55; r: 4; }
-    50% { opacity: 1; r: 6.5; }
+  .radar-sweep-group {
+    transform-origin: 200px 170px;
+    animation: radar-rotate 4.5s linear infinite;
   }
 
-  .ai-pulse-line {
-    stroke-dasharray: 6 10;
-    animation: ai-line-flow 2.4s linear infinite;
+  @keyframes radar-rotate {
+    to { transform: rotate(360deg); }
   }
 
-  @keyframes ai-line-flow {
-    to { stroke-dashoffset: -32; }
+  .radar-blip-dot { animation: radar-dot-glow 2.4s ease-in-out infinite; transform-origin: center; }
+  .radar-blip-ring { animation: radar-ping 2.4s ease-out infinite; transform-origin: center; }
+  .radar-blip.b1 .radar-blip-dot, .radar-blip.b1 .radar-blip-ring { animation-delay: 0s; }
+  .radar-blip.b2 .radar-blip-dot, .radar-blip.b2 .radar-blip-ring { animation-delay: 0.7s; }
+  .radar-blip.b3 .radar-blip-dot, .radar-blip.b3 .radar-blip-ring { animation-delay: 1.4s; }
+  .radar-blip.b4 .radar-blip-dot, .radar-blip.b4 .radar-blip-ring { animation-delay: 2.1s; }
+
+  @keyframes radar-dot-glow {
+    0%, 100% { opacity: 0.6; r: 3; }
+    50% { opacity: 1; r: 4.5; }
+  }
+
+  @keyframes radar-ping {
+    0% { r: 3; opacity: 0.9; stroke-width: 2; }
+    100% { r: 26; opacity: 0; stroke-width: 0.5; }
   }
 
   /* ====== CONTACT ====== */
   #contact { padding: 7rem 0; }
+
 
   .contact-grid {
     display: grid;
@@ -1673,6 +1678,386 @@
     .form-row { grid-template-columns: 1fr; gap: 0; }
   }
 
+  /* ====== AI INTAKE DEMO ====== */
+  #ai-intake { padding: 6rem 0; }
+
+  .intake-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    padding: 2.5rem;
+    max-width: 900px;
+    margin: 3rem auto 0;
+  }
+
+  .intake-textarea {
+    width: 100%;
+    background: rgba(0,0,0,0.15);
+    border: 1px solid var(--glass-border);
+    outline: none;
+    padding: 1rem 1.25rem;
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    font-size: 0.92rem;
+    min-height: 90px;
+    resize: vertical;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .intake-textarea:focus { border-color: var(--cyan-500); box-shadow: var(--cyan-glow-sm); }
+  .intake-textarea::placeholder { color: var(--text-muted); }
+
+  .intake-examples {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.85rem;
+  }
+
+  .intake-example-chip {
+    padding: 0.3rem 0.8rem;
+    background: rgba(181,101,255,0.06);
+    border: 1px solid var(--glass-border);
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: var(--font-mono);
+  }
+
+  .intake-example-chip:hover { border-color: var(--cyan-500); color: var(--cyan-500); }
+
+  .intake-submit-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .intake-result {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--glass-border);
+    display: none;
+  }
+
+  .intake-result.visible {
+    display: block;
+    animation: heroRise 0.5s var(--spring-soft) both;
+  }
+
+  .intake-result-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .intake-result-cat {
+    font-size: 1.1rem;
+    font-weight: 800;
+  }
+
+  .intake-result-cat span { color: var(--cyan-500); }
+
+  .intake-confidence {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .intake-confidence-bg {
+    width: 140px;
+    height: 4px;
+    background: rgba(181,101,255,0.1);
+    overflow: hidden;
+    margin-top: 0.4rem;
+  }
+
+  .intake-confidence-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--cyan-500), #ec4899);
+    box-shadow: 0 0 8px rgba(181,101,255,0.4);
+    transition: width 0.8s var(--spring-soft);
+    width: 0%;
+  }
+
+  .intake-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+
+  .intake-tag {
+    padding: 0.25rem 0.7rem;
+    background: rgba(181,101,255,0.08);
+    border: 1px solid var(--glass-border);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--cyan-400);
+    font-family: var(--font-mono);
+  }
+
+  .intake-result-desc {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+    max-width: 560px;
+  }
+
+  /* ====== HOW IT WORKS ====== */
+  #how-it-works {
+    padding: 7rem 0;
+    background: linear-gradient(180deg, transparent, rgba(181,101,255,0.02), transparent);
+  }
+
+  .hiw-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 4rem;
+    position: relative;
+  }
+
+  .hiw-grid::before {
+    content: '';
+    position: absolute;
+    top: 26px;
+    left: 12.5%;
+    right: 12.5%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--glass-border-hover), transparent);
+  }
+
+  .hiw-step { position: relative; text-align: center; }
+
+  .hiw-num {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    border: 1.5px solid var(--glass-border);
+    background: var(--card-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.25rem;
+    font-family: var(--font-mono);
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--cyan-500);
+    position: relative;
+    z-index: 1;
+    transition: transform 0.35s var(--spring), box-shadow 0.35s var(--spring), border-color 0.3s ease;
+  }
+
+  .hiw-step:hover .hiw-num {
+    transform: scale(1.12);
+    border-color: var(--cyan-500);
+    box-shadow: var(--cyan-glow);
+  }
+
+  .hiw-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+  }
+
+  .hiw-desc {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    max-width: 220px;
+    margin: 0 auto;
+  }
+
+  /* ====== PRICING ====== */
+  #pricing { padding: 7rem 0; }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: var(--glass-border);
+    border: 1px solid var(--glass-border);
+    margin-top: 3rem;
+  }
+
+  .pricing-card {
+    background: var(--card-bg);
+    padding: 2.5rem 2rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .pricing-card.featured {
+    background: rgba(181,101,255,0.04);
+    border-top: 2px solid var(--cyan-500);
+  }
+
+  .pricing-badge {
+    position: absolute;
+    top: -1px; right: 1.5rem;
+    background: var(--cyan-500);
+    color: var(--navy-900);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.7rem;
+    font-family: var(--font-mono);
+  }
+
+  .pricing-plan-name {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cyan-500);
+    font-family: var(--font-mono);
+    margin-bottom: 0.75rem;
+  }
+
+  .pricing-amount {
+    font-size: 2.2rem;
+    font-weight: 800;
+    font-family: var(--font-mono);
+    margin-bottom: 0.25rem;
+  }
+
+  .pricing-amount span {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    font-family: var(--font-main);
+  }
+
+  .pricing-desc {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.75rem;
+    font-weight: 300;
+  }
+
+  .pricing-features {
+    list-style: none;
+    margin-bottom: 2rem;
+    flex: 1;
+  }
+
+  .pricing-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.5rem 0;
+    border-top: 1px solid rgba(181,101,255,0.06);
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+  }
+
+  .pricing-features li:first-child { border-top: none; }
+
+  .pricing-features li::before {
+    content: '✓';
+    color: var(--cyan-500);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .pricing-note {
+    margin-top: 2.5rem;
+    padding: 1.5rem 2rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .pricing-note-icon { font-size: 1.3rem; flex-shrink: 0; }
+
+  /* ====== SECOND LOGO STRIP (integrations) ====== */
+  .integrations-row { margin-top: 3rem; }
+
+  .integrations-row .partners-track { animation-direction: reverse; }
+
+  /* ====== FAQ ====== */
+  #faq { padding: 7rem 0; }
+
+  .faq-list { max-width: 780px; margin: 3rem auto 0; }
+
+  .faq-item {
+    border-bottom: 1px solid var(--glass-border);
+  }
+
+  .faq-question {
+    width: 100%;
+    background: transparent;
+    border: none;
+    text-align: left;
+    padding: 1.5rem 0.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  .faq-question-icon {
+    flex-shrink: 0;
+    width: 26px; height: 26px;
+    border: 1px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    color: var(--cyan-500);
+    transition: transform 0.35s var(--spring), border-color 0.3s ease;
+  }
+
+  .faq-item.open .faq-question-icon { transform: rotate(45deg); border-color: var(--cyan-500); }
+
+  .faq-answer-wrap {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s var(--spring-soft);
+  }
+
+  .faq-item.open .faq-answer-wrap { grid-template-rows: 1fr; }
+
+  .faq-answer-inner { overflow: hidden; }
+
+  .faq-answer {
+    padding: 0 0.25rem 1.5rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.75;
+    font-weight: 300;
+    max-width: 640px;
+  }
+
+  @media (max-width: 1024px) {
+    .hiw-grid { grid-template-columns: repeat(2, 1fr); gap: 3rem 2rem; }
+    .hiw-grid::before { display: none; }
+    .pricing-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    .hiw-grid { grid-template-columns: 1fr; }
+    .intake-card { padding: 1.5rem; }
+    .intake-result-head { flex-direction: column; align-items: flex-start; }
+  }
+
   /* ====== ANIMATIONS (Framer-Motion style: spring easing, stagger, hover/tap) ====== */
   .fade-in {
     opacity: 0;
@@ -1687,7 +2072,7 @@
 
   @media (prefers-reduced-motion: reduce) {
     .fade-in { transition: opacity 0.3s linear; transform: none !important; }
-    .hero-title, .hero-badge-dot, .sh-dot, .partners-track, .ai-node, .ai-pulse-line { animation: none !important; }
+    .hero-title, .hero-badge-dot, .sh-dot, .partners-track, .radar-sweep-group, .radar-blip-dot, .radar-blip-ring { animation: none !important; }
   }
 
   /* Hover-lift: springy elevation for cards, used across services/paths/jobs/team/testimonials/blog */
@@ -1769,10 +2154,9 @@
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
     <li><a href="#about">About</a></li>
+    <li><a href="#pricing">Pricing</a></li>
     <li><a href="#recruitment">Jobs</a></li>
-    <li><a href="#how-we-help">Solutions</a></li>
-    <li><a href="#team">Team</a></li>
-    <li><a href="#blog">Insights</a></li>
+    <li><a href="#faq">FAQ</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:0;">
@@ -1919,6 +2303,44 @@
   </div>
 </section>
 
+<!-- ====== AI INTAKE DEMO ====== -->
+<section id="ai-intake">
+  <div class="container">
+    <div class="section-header fade-in" style="text-align:center;max-width:640px;margin:0 auto 0;">
+      <div class="section-label" style="justify-content:center">Not Sure Where To Start?</div>
+      <h2 class="section-title">Tell Us What You Need</h2>
+      <p class="section-desc" style="margin:0 auto;">Describe your situation in plain language — our intake assistant sorts it to the right team and shows you what happens next.</p>
+    </div>
+    <div class="intake-card fade-in">
+      <textarea class="intake-textarea" id="intake-input" placeholder="e.g. Our checkout page keeps timing out during peak traffic and we suspect a DDoS attempt..."></textarea>
+      <div class="intake-examples">
+        <span class="intake-example-chip" onclick="fillIntakeExample(this)">Our server room flooded and backups may be corrupted</span>
+        <span class="intake-example-chip" onclick="fillIntakeExample(this)">Hiring a senior DevOps engineer with Kubernetes experience</span>
+        <span class="intake-example-chip" onclick="fillIntakeExample(this)">Suspicious login attempts on our VPN overnight</span>
+      </div>
+      <div class="intake-submit-row">
+        <button class="btn-solid" onclick="analyzeIntake()">Analyze Request</button>
+        <span style="font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono)">Illustrative demo — routes to a real specialist when you submit the contact form</span>
+      </div>
+
+      <div class="intake-result" id="intake-result">
+        <div class="intake-result-head">
+          <div>
+            <div class="intake-result-cat">Routed to: <span id="intake-cat">—</span></div>
+            <div class="intake-confidence">
+              Match confidence: <span id="intake-pct">0%</span>
+              <div class="intake-confidence-bg"><div class="intake-confidence-fill" id="intake-confidence-fill"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="intake-tags" id="intake-tags"></div>
+        <p class="intake-result-desc" id="intake-desc"></p>
+        <a href="#contact" class="btn-glow">Get Matched With a Specialist</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ====== SERVICES ====== -->
 <section id="services">
   <div class="container">
@@ -1989,31 +2411,46 @@
         <p>We're engineers and technologists ourselves, which means we don't hand you off to a call centre or a keyword-matching algorithm. You get a dedicated team that understands your stack, your culture, and your stakes.</p>
       </div>
       <div class="ai-visual fade-in" style="transition-delay:0.15s" aria-hidden="true">
-        <span class="ai-visual-label">// AI Inference Layer</span>
+        <span class="ai-visual-label">// Live Radar Scan</span>
         <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg">
-          <g stroke="var(--cyan-500)" stroke-opacity="0.35" stroke-width="1" fill="none">
-            <path class="ai-pulse-line" d="M70,90 L200,60" />
-            <path class="ai-pulse-line" d="M70,90 L60,200" />
-            <path class="ai-pulse-line" d="M200,60 L330,100" />
-            <path class="ai-pulse-line" d="M200,60 L200,170" />
-            <path class="ai-pulse-line" d="M60,200 L200,170" />
-            <path class="ai-pulse-line" d="M200,170 L330,100" />
-            <path class="ai-pulse-line" d="M60,200 L120,280" />
-            <path class="ai-pulse-line" d="M200,170 L120,280" />
-            <path class="ai-pulse-line" d="M200,170 L300,270" />
-            <path class="ai-pulse-line" d="M330,100 L300,270" />
-            <path class="ai-pulse-line" d="M120,280 L300,270" />
+          <!-- range rings + crosshair -->
+          <g stroke="var(--cyan-500)" fill="none">
+            <circle cx="200" cy="170" r="40" stroke-opacity="0.18" stroke-width="1" />
+            <circle cx="200" cy="170" r="80" stroke-opacity="0.16" stroke-width="1" />
+            <circle cx="200" cy="170" r="120" stroke-opacity="0.14" stroke-width="1" />
+            <circle cx="200" cy="170" r="158" stroke-opacity="0.12" stroke-width="1" />
+            <line x1="200" y1="12" x2="200" y2="328" stroke-opacity="0.08" stroke-width="1" />
+            <line x1="42" y1="170" x2="358" y2="170" stroke-opacity="0.08" stroke-width="1" />
           </g>
-          <g fill="var(--cyan-500)">
-            <circle class="ai-node n1" cx="70" cy="90" r="5" />
-            <circle class="ai-node n2" cx="200" cy="60" r="5" />
-            <circle class="ai-node n3" cx="330" cy="100" r="5" />
-            <circle class="ai-node n4" cx="60" cy="200" r="5" />
-            <circle class="ai-node n5" cx="200" cy="170" r="6" />
-            <circle class="ai-node n6" cx="120" cy="280" r="5" />
-            <circle class="ai-node n7" cx="300" cy="270" r="5" />
-            <circle class="ai-node n8" cx="200" cy="170" r="12" fill-opacity="0.12" />
+
+          <!-- rotating sweep -->
+          <g class="radar-sweep-group">
+            <path d="M200,170 L358,170 A158,158 0 0,1 321.06,67.4 Z" fill="var(--cyan-500)" fill-opacity="0.16" />
+            <line x1="200" y1="170" x2="358" y2="170" stroke="var(--cyan-500)" stroke-opacity="0.25" stroke-width="8" />
+            <line x1="200" y1="170" x2="358" y2="170" stroke="var(--cyan-500)" stroke-width="2" />
           </g>
+
+          <!-- detected blips -->
+          <g class="radar-blip b1">
+            <circle class="radar-blip-ring" cx="280" cy="120" r="3" fill="none" stroke="var(--cyan-500)" />
+            <circle class="radar-blip-dot" cx="280" cy="120" r="3" fill="var(--cyan-500)" />
+          </g>
+          <g class="radar-blip b2">
+            <circle class="radar-blip-ring" cx="142" cy="222" r="3" fill="none" stroke="var(--cyan-500)" />
+            <circle class="radar-blip-dot" cx="142" cy="222" r="3" fill="var(--cyan-500)" />
+          </g>
+          <g class="radar-blip b3">
+            <circle class="radar-blip-ring" cx="252" cy="248" r="3" fill="none" stroke="var(--cyan-500)" />
+            <circle class="radar-blip-dot" cx="252" cy="248" r="3" fill="var(--cyan-500)" />
+          </g>
+          <g class="radar-blip b4">
+            <circle class="radar-blip-ring" cx="132" cy="102" r="3" fill="none" stroke="var(--cyan-500)" />
+            <circle class="radar-blip-dot" cx="132" cy="102" r="3" fill="var(--cyan-500)" />
+          </g>
+
+          <!-- origin marker -->
+          <circle cx="200" cy="170" r="10" fill="var(--cyan-500)" fill-opacity="0.15" />
+          <circle cx="200" cy="170" r="4" fill="var(--cyan-500)" />
         </svg>
       </div>
     </div>
@@ -2032,6 +2469,39 @@
         <div class="about-value-icon">🤝</div>
         <div class="about-value-title">Partnership</div>
         <div class="about-value-desc">We embed with your team rather than ticket-queue you. Long relationships, not one-off jobs.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== HOW IT WORKS ====== -->
+<section id="how-it-works">
+  <div class="container">
+    <div class="section-header fade-in" style="text-align:center;max-width:600px;margin:0 auto 0;">
+      <div class="section-label" style="justify-content:center">The Process</div>
+      <h2 class="section-title">How It Works</h2>
+      <p class="section-desc" style="margin:0 auto;">From first message to resolved ticket or signed offer — four steps, no black box.</p>
+    </div>
+    <div class="hiw-grid">
+      <div class="hiw-step fade-in">
+        <div class="hiw-num">01</div>
+        <div class="hiw-title">Tell us what's happening</div>
+        <div class="hiw-desc">Describe the issue or the role — through the intake box above, a call, or your account engineer.</div>
+      </div>
+      <div class="hiw-step fade-in" style="transition-delay:0.08s">
+        <div class="hiw-num">02</div>
+        <div class="hiw-title">AI-assisted triage</div>
+        <div class="hiw-desc">Our systems classify urgency and skill match instantly, routing you to the right specialist or candidate pool.</div>
+      </div>
+      <div class="hiw-step fade-in" style="transition-delay:0.16s">
+        <div class="hiw-num">03</div>
+        <div class="hiw-title">A human takes over</div>
+        <div class="hiw-desc">A dedicated engineer or recruiter picks up the thread — no ticket queues, no keyword-matching algorithm.</div>
+      </div>
+      <div class="hiw-step fade-in" style="transition-delay:0.24s">
+        <div class="hiw-num">04</div>
+        <div class="hiw-title">Resolved, matched, or hired</div>
+        <div class="hiw-desc">Incident closed and documented, or candidate interviewed and placed — with a report either way.</div>
       </div>
     </div>
   </div>
@@ -2074,6 +2544,61 @@
         </ul>
         <a href="#recruitment" class="btn-glow">Post a Role</a>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PRICING ====== -->
+<section id="pricing">
+  <div class="container">
+    <div class="section-header fade-in" style="text-align:center;max-width:600px;margin:0 auto 0;">
+      <div class="section-label" style="justify-content:center">Support Plans</div>
+      <h2 class="section-title">Simple, Transparent Pricing</h2>
+      <p class="section-desc" style="margin:0 auto;">Pick the coverage level that matches your infrastructure. Upgrade or downgrade anytime.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card fade-in">
+        <div class="pricing-plan-name">Starter</div>
+        <div class="pricing-amount">$1,200<span>/mo</span></div>
+        <p class="pricing-desc">For small teams that need a safety net, not a full department.</p>
+        <ul class="pricing-features">
+          <li>Business-hours help desk (9am–7pm)</li>
+          <li>Up to 25 monitored endpoints</li>
+          <li>Monthly infrastructure health report</li>
+          <li>Email & chat support, 4hr response SLA</li>
+        </ul>
+        <a href="#contact" class="btn-glow" style="text-align:center;">Get Started</a>
+      </div>
+      <div class="pricing-card featured fade-in" style="transition-delay:0.1s">
+        <div class="pricing-badge">Most Popular</div>
+        <div class="pricing-plan-name">Business</div>
+        <div class="pricing-amount">$3,400<span>/mo</span></div>
+        <p class="pricing-desc">Full-stack coverage for growing companies that can't afford downtime.</p>
+        <ul class="pricing-features">
+          <li>24/7 help desk with sub-4-minute response</li>
+          <li>Up to 150 monitored endpoints</li>
+          <li>Dedicated account engineer</li>
+          <li>Quarterly security audit & pen test</li>
+          <li>Priority incident escalation path</li>
+        </ul>
+        <a href="#contact" class="btn-solid" style="text-align:center;">Get Started</a>
+      </div>
+      <div class="pricing-card fade-in" style="transition-delay:0.2s">
+        <div class="pricing-plan-name">Enterprise</div>
+        <div class="pricing-amount">Custom</div>
+        <p class="pricing-desc">For regulated or multi-site organisations with complex compliance needs.</p>
+        <ul class="pricing-features">
+          <li>Unlimited endpoints, multi-region coverage</li>
+          <li>Dedicated SOC team & named engineers</li>
+          <li>Custom SLAs and compliance reporting</li>
+          <li>On-site support options</li>
+        </ul>
+        <a href="#contact" class="btn-glow" style="text-align:center;">Talk to Sales</a>
+      </div>
+    </div>
+    <div class="pricing-note fade-in">
+      <div class="pricing-note-icon">💼</div>
+      <div><strong>Recruitment is fee-on-placement, not subscription:</strong> a percentage of first-year salary, invoiced only once your hire starts — with a 90-day placement guarantee. Ask us for the current rate card.</div>
     </div>
   </div>
 </section>
@@ -2224,6 +2749,34 @@
       <span class="partner-logo">Splunk</span>
     </div>
   </div>
+
+  <div class="container integrations-row">
+    <div class="partners-label">Connects With Your Toolchain</div>
+  </div>
+  <div class="partners-track-wrap">
+    <div class="partners-track" id="integrations-track">
+      <span class="partner-logo">Slack</span>
+      <span class="partner-logo">Microsoft Teams</span>
+      <span class="partner-logo">Jira</span>
+      <span class="partner-logo">ServiceNow</span>
+      <span class="partner-logo">Zendesk</span>
+      <span class="partner-logo">Greenhouse</span>
+      <span class="partner-logo">Lever</span>
+      <span class="partner-logo">Workday</span>
+      <span class="partner-logo">BambooHR</span>
+      <span class="partner-logo">LinkedIn Talent</span>
+      <span class="partner-logo">Slack</span>
+      <span class="partner-logo">Microsoft Teams</span>
+      <span class="partner-logo">Jira</span>
+      <span class="partner-logo">ServiceNow</span>
+      <span class="partner-logo">Zendesk</span>
+      <span class="partner-logo">Greenhouse</span>
+      <span class="partner-logo">Lever</span>
+      <span class="partner-logo">Workday</span>
+      <span class="partner-logo">BambooHR</span>
+      <span class="partner-logo">LinkedIn Talent</span>
+    </div>
+  </div>
 </section>
 
 <!-- ====== BLOG ====== -->
@@ -2265,7 +2818,7 @@
         <div class="blog-card-img">🌐</div>
         <div class="blog-card-content">
           <div class="blog-card-cat">Talent & Culture</div>
-          <h3 class="blog-card-title">The £150K Engineer: Why Technical Talent is the New Premium Asset</h3>
+          <h3 class="blog-card-title">The $150K Engineer: Why Technical Talent is the New Premium Asset</h3>
           <p class="blog-card-excerpt">Salaries for senior cloud and security engineers have surged 28% in 24 months. We analyse the data — and what it means for your hiring strategy.</p>
           <div class="blog-card-meta">
             <span>Priya Nair</span>
@@ -2277,6 +2830,60 @@
     </div>
     <div style="text-align:center;margin-top:2rem;">
       <a href="#" class="btn-glow">Read All Articles</a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FAQ ====== -->
+<section id="faq">
+  <div class="container">
+    <div class="section-header fade-in" style="text-align:center;max-width:600px;margin:0 auto 0;">
+      <div class="section-label" style="justify-content:center">Questions</div>
+      <h2 class="section-title">Frequently Asked</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item fade-in">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What's your actual response time for critical incidents?
+          <span class="faq-question-icon">+</span>
+        </button>
+        <div class="faq-answer-wrap"><div class="faq-answer-inner"><p class="faq-answer">Business and Enterprise plans get a sub-4-minute acknowledgement SLA on priority-1 incidents, 24/7. Starter plan covers business hours (9am–7pm) with the same 4-minute target during that window. Every incident gets a written root-cause report afterward, regardless of plan.</p></div></div>
+      </div>
+      <div class="faq-item fade-in">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Do you work with our existing tools, or do we have to switch?
+          <span class="faq-question-icon">+</span>
+        </button>
+        <div class="faq-answer-wrap"><div class="faq-answer-inner"><p class="faq-answer">We integrate with what you already run — ticketing (Jira, ServiceNow, Zendesk), comms (Slack, Teams), and for recruitment, your ATS (Greenhouse, Lever, Workday, BambooHR) or LinkedIn Talent. No forced migrations.</p></div></div>
+      </div>
+      <div class="faq-item fade-in">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What happens if a placed candidate doesn't work out?
+          <span class="faq-question-icon">+</span>
+        </button>
+        <div class="faq-answer-wrap"><div class="faq-answer-inner"><p class="faq-answer">Every placement carries a 90-day guarantee — if the hire leaves or is let go within that window, we run the search again at no additional fee.</p></div></div>
+      </div>
+      <div class="faq-item fade-in">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Can you support us outside the UK and Ireland?
+          <span class="faq-question-icon">+</span>
+        </button>
+        <div class="faq-answer-wrap"><div class="faq-answer-inner"><p class="faq-answer">Yes — our Mumbai team covers APAC and Middle East hours, working alongside our UK/Ireland engineers for round-the-clock, follow-the-sun coverage on Business and Enterprise plans.</p></div></div>
+      </div>
+      <div class="faq-item fade-in">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Is there a contract lock-in?
+          <span class="faq-question-icon">+</span>
+        </button>
+        <div class="faq-answer-wrap"><div class="faq-answer-inner"><p class="faq-answer">Support plans are month-to-month with 30 days' notice to cancel or change tiers. Enterprise agreements can be annual if you need budget predictability — that's a preference, not a requirement.</p></div></div>
+      </div>
+      <div class="faq-item fade-in">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What compliance standards do you meet?
+          <span class="faq-question-icon">+</span>
+        </button>
+        <div class="faq-answer-wrap"><div class="faq-answer-inner"><p class="faq-answer">Our security operations follow ISO 27001-aligned controls, and we run SOC 2-style audits quarterly for Business and Enterprise clients. Enterprise plans can add sector-specific compliance reporting (HIPAA, PCI-DSS, GDPR) on request.</p></div></div>
+      </div>
     </div>
   </div>
 </section>
@@ -2442,14 +3049,14 @@
 
   // ====== JOBS DATA ======
   const jobs = [
-    { title: 'Senior Cloud Architect', company: 'TechCorp Global', location: 'London', type: 'cloud', salary: '£95–120k', tags: ['AWS', 'Terraform', 'Kubernetes'], posted: '2 days ago', remote: 'Hybrid' },
-    { title: 'Cybersecurity Engineer', company: 'FinSecure Ltd', location: 'Remote', type: 'security', salary: '£80–95k', tags: ['SIEM', 'Zero Trust', 'CISSP'], posted: '1 day ago', remote: 'Remote' },
-    { title: 'Principal DevOps Engineer', company: 'ScaleUp.io', location: 'Manchester', type: 'engineering', salary: '£90–110k', tags: ['Kubernetes', 'CI/CD', 'Go'], posted: '3 days ago', remote: 'Hybrid' },
-    { title: 'CISO', company: 'RetailEdge Group', location: 'London', type: 'leadership', salary: '£140–180k', tags: ['Leadership', 'GRC', 'ISO27001'], posted: '1 week ago', remote: 'On-site' },
-    { title: 'ML Engineer — AI Infrastructure', company: 'Cortex AI', location: 'Edinburgh', type: 'data', salary: '£85–105k', tags: ['Python', 'PyTorch', 'MLOps'], posted: '4 days ago', remote: 'Hybrid' },
-    { title: 'Site Reliability Engineer', company: 'CloudNative Co', location: 'Remote', type: 'cloud', salary: '£75–90k', tags: ['SRE', 'Observability', 'Python'], posted: '5 days ago', remote: 'Remote' },
-    { title: 'Head of Engineering', company: 'BuildFast Ltd', location: 'London', type: 'leadership', salary: '£120–150k', tags: ['Leadership', 'React', 'AWS'], posted: '3 days ago', remote: 'Hybrid' },
-    { title: 'Data Platform Engineer', company: 'Analytix', location: 'Dublin', type: 'data', salary: '£70–85k', tags: ['Spark', 'dbt', 'Snowflake'], posted: '2 days ago', remote: 'Hybrid' },
+    { title: 'Senior Cloud Architect', company: 'TechCorp Global', location: 'London', type: 'cloud', salary: '$95–120k', tags: ['AWS', 'Terraform', 'Kubernetes'], posted: '2 days ago', remote: 'Hybrid' },
+    { title: 'Cybersecurity Engineer', company: 'FinSecure Ltd', location: 'Remote', type: 'security', salary: '$80–95k', tags: ['SIEM', 'Zero Trust', 'CISSP'], posted: '1 day ago', remote: 'Remote' },
+    { title: 'Principal DevOps Engineer', company: 'ScaleUp.io', location: 'Manchester', type: 'engineering', salary: '$90–110k', tags: ['Kubernetes', 'CI/CD', 'Go'], posted: '3 days ago', remote: 'Hybrid' },
+    { title: 'CISO', company: 'RetailEdge Group', location: 'London', type: 'leadership', salary: '$140–180k', tags: ['Leadership', 'GRC', 'ISO27001'], posted: '1 week ago', remote: 'On-site' },
+    { title: 'ML Engineer — AI Infrastructure', company: 'Cortex AI', location: 'Edinburgh', type: 'data', salary: '$85–105k', tags: ['Python', 'PyTorch', 'MLOps'], posted: '4 days ago', remote: 'Hybrid' },
+    { title: 'Site Reliability Engineer', company: 'CloudNative Co', location: 'Remote', type: 'cloud', salary: '$75–90k', tags: ['SRE', 'Observability', 'Python'], posted: '5 days ago', remote: 'Remote' },
+    { title: 'Head of Engineering', company: 'BuildFast Ltd', location: 'London', type: 'leadership', salary: '$120–150k', tags: ['Leadership', 'React', 'AWS'], posted: '3 days ago', remote: 'Hybrid' },
+    { title: 'Data Platform Engineer', company: 'Analytix', location: 'Dublin', type: 'data', salary: '$70–85k', tags: ['Spark', 'dbt', 'Snowflake'], posted: '2 days ago', remote: 'Hybrid' },
   ];
 
   let currentFilter = 'all';
@@ -2602,6 +3209,71 @@
       btn.disabled = false;
       btn.textContent = 'Send Message';
     }
+  }
+
+  // ====== AI INTAKE DEMO ======
+  // Lightweight keyword-based classifier — illustrative only, mirrors the
+  // System Health / Talent Matcher widgets elsewhere on this page. Real
+  // requests are routed by a person once the contact form is submitted.
+  const INTAKE_KEYWORDS = {
+    support: ['server', 'down', 'outage', 'security', 'breach', 'hack', 'network', 'cloud', 'migration',
+      'downtime', 'bug', 'slow', 'backup', 'ransomware', 'firewall', 'vpn', 'help desk', 'ticket',
+      'flooded', 'ddos', 'login', 'password', 'malware', 'crash', 'latency', 'database', 'infrastructure'],
+    recruitment: ['hire', 'hiring', 'candidate', 'engineer', 'developer', 'recruit', 'talent', 'role',
+      'position', 'job', 'salary', 'resume', 'cv', 'interview', 'onboard', 'devops', 'kubernetes',
+      'headcount', 'staff', 'team member', 'contractor', 'freelance'],
+  };
+
+  function fillIntakeExample(el) {
+    document.getElementById('intake-input').value = el.textContent.trim();
+    analyzeIntake();
+  }
+
+  function analyzeIntake() {
+    const raw = document.getElementById('intake-input').value.toLowerCase();
+    const result = document.getElementById('intake-result');
+    if (!raw.trim()) { result.classList.remove('visible'); return; }
+
+    let supportHits = [];
+    let recruitHits = [];
+    INTAKE_KEYWORDS.support.forEach((kw) => { if (raw.includes(kw)) supportHits.push(kw); });
+    INTAKE_KEYWORDS.recruitment.forEach((kw) => { if (raw.includes(kw)) recruitHits.push(kw); });
+
+    const total = supportHits.length + recruitHits.length;
+    let category, pct, tags, desc;
+
+    if (total === 0) {
+      category = 'General Inquiry';
+      pct = 62;
+      tags = ['New Request'];
+      desc = 'We couldn\'t detect a specific technical or hiring signal — no problem. A member of our team will read this and route it personally.';
+    } else if (supportHits.length >= recruitHits.length) {
+      category = 'IT Support';
+      pct = Math.min(97, 60 + supportHits.length * 8);
+      tags = supportHits.slice(0, 6).map((t) => t.toUpperCase());
+      desc = 'This reads like an infrastructure or security issue. Based on current on-call capacity, an engineer can typically respond within 4 minutes on our Business and Enterprise plans.';
+    } else {
+      category = 'Talent & Recruitment';
+      pct = Math.min(97, 60 + recruitHits.length * 8);
+      tags = recruitHits.slice(0, 6).map((t) => t.toUpperCase());
+      desc = 'This reads like a hiring need. Our talent engine can typically surface a shortlist of pre-screened candidates within 72 hours of a full role brief.';
+    }
+
+    document.getElementById('intake-cat').textContent = category;
+    document.getElementById('intake-pct').textContent = pct + '%';
+    document.getElementById('intake-confidence-fill').style.width = pct + '%';
+    document.getElementById('intake-desc').textContent = desc;
+    document.getElementById('intake-tags').innerHTML = tags.map((t) => `<span class="intake-tag">${t}</span>`).join('');
+    result.classList.add('visible');
+  }
+
+  // ====== FAQ ACCORDION ======
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const list = btn.closest('.faq-list');
+    const wasOpen = item.classList.contains('open');
+    list.querySelectorAll('.faq-item.open').forEach((el) => el.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
   }
 
   // ====== NAV SCROLL EFFECT ======
