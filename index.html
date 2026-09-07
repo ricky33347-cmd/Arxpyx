@@ -2153,8 +2153,8 @@
     .intake-result-head { flex-direction: column; align-items: flex-start; }
   }
 
-  /* ====== 3D PRISM SHOWCASE ====== */
-  #prism {
+  /* ====== 3D BLACK HOLE SHOWCASE ====== */
+  #blackhole {
     height: 100vh;
     min-height: 560px;
     position: relative;
@@ -2162,13 +2162,13 @@
     background: #05040c;
   }
 
-  #prism-host {
+  #blackhole-host {
     position: absolute;
     inset: 0;
     z-index: 0;
   }
 
-  #prism-host canvas {
+  #blackhole-host canvas {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -2176,7 +2176,7 @@
     display: block;
   }
 
-  .prism-overlay {
+  .blackhole-overlay {
     position: relative;
     z-index: 1;
     height: 100%;
@@ -2191,7 +2191,7 @@
     pointer-events: none;
   }
 
-  .prism-title {
+  .blackhole-title {
     font-size: clamp(2.2rem, 5.5vw, 4.2rem);
     font-weight: 800;
     line-height: 1.08;
@@ -2200,9 +2200,9 @@
     text-shadow: 0 4px 30px rgba(5,4,12,0.8);
   }
 
-  .prism-title .accent { color: var(--cyan-500); text-shadow: 0 4px 30px rgba(5,4,12,0.8), var(--cyan-glow); }
+  .blackhole-title .accent { color: var(--cyan-500); text-shadow: 0 4px 30px rgba(5,4,12,0.8), var(--cyan-glow); }
 
-  .prism-desc {
+  .blackhole-desc {
     font-size: 1rem;
     color: var(--text-secondary);
     line-height: 1.8;
@@ -2213,8 +2213,8 @@
   }
 
   @media (max-width: 768px) {
-    .prism-overlay { padding: 0 1.5rem; }
-    #prism { height: 85vh; }
+    .blackhole-overlay { padding: 0 1.5rem; }
+    #blackhole { height: 85vh; }
   }
 
   /* ====== ANIMATIONS (Framer-Motion style: spring easing, stagger, hover/tap) ====== */
@@ -2803,13 +2803,13 @@
   </div>
 </section>
 
-<!-- ====== 3D PRISM SHOWCASE (secondary hero) ====== -->
-<section id="prism">
-  <div id="prism-host" aria-hidden="true"></div>
-  <div class="prism-overlay">
-    <div class="section-label" style="justify-content:center">Full Visibility</div>
-    <h2 class="prism-title">Nothing Hidden.<br><span class="accent">Every Angle Covered.</span></h2>
-    <p class="prism-desc">Split any problem open and you'll find the same thing — infrastructure, security, and people, all visible at once. Move your cursor through the light.</p>
+<!-- ====== 3D BLACK HOLE SHOWCASE (secondary hero) ====== -->
+<section id="blackhole">
+  <div id="blackhole-host" aria-hidden="true"></div>
+  <div class="blackhole-overlay">
+    <div class="section-label" style="justify-content:center">Total Gravity</div>
+    <h2 class="blackhole-title">Nothing Escapes<br><span class="accent">Our Orbit.</span></h2>
+    <p class="blackhole-desc">Every ticket, alert, and application gets pulled in, processed, and sent back out — resolved, matched, or hired. Nothing lingers at the edge. Move your cursor through the pull.</p>
   </div>
   <button class="scroll-cue" onclick="document.getElementById('team').scrollIntoView({behavior:'smooth'})" aria-label="Scroll to explore">
     <span>Scroll To Explore</span>
@@ -3975,19 +3975,19 @@
   raf = requestAnimationFrame(frame);
 })();
 </script>
-<!-- ====== 3D PRISM SCENE ====== -->
-<!-- Original vanilla-three.js scene. The pmndrs "nextjs-prism" example is also a
-     client-rendered app with no fetchable source, so rather than copy anything,
-     this hand-writes the well-known, widely-published "chromatic dispersion"
-     refraction technique from scratch: for each fragment, refract the view ray
-     through the surface three times at slightly different indices of refraction
-     (one per RGB channel) and sample a cubemap environment with each — the same
-     general public method behind most glass-prism shader demos. Reuses the
-     three.js core already loaded for the hero's Fracture glass effect. -->
+<!-- ====== 3D BLACK HOLE SCENE ====== -->
+<!-- Original vanilla-three.js scene. Built from general astrophysics concepts
+     (event horizon, accretion disk, relativistic polar jets) rather than any
+     copyrighted image or video — those were used only as loose inspiration for
+     the color palette (a black core, warm glowing ring, starfield). No true
+     gravitational-lensing ray tracing here (that's a much heavier technique);
+     the "ring" look comes from tilting the disk toward face-on and giving the
+     event horizon its own Fresnel rim glow. Reuses the three.js core already
+     loaded for the hero's Fracture glass effect. -->
 <script>
 (function () {
-  const host = document.getElementById('prism-host');
-  const section = document.getElementById('prism');
+  const host = document.getElementById('blackhole-host');
+  const section = document.getElementById('blackhole');
   if (!host || !section || typeof THREE === 'undefined') return;
 
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -3997,86 +3997,48 @@
 
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-  renderer.setClearColor(0x05040c, 1);
+  renderer.setClearColor(0x03040a, 1);
   if ('outputEncoding' in renderer) renderer.outputEncoding = THREE.sRGBEncoding;
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
-  camera.position.set(0, 0, 13);
+  camera.position.set(0, 0, 12.5);
   camera.lookAt(0, 0, 0);
 
-  scene.add(new THREE.AmbientLight(0x30203f, 1.0));
+  scene.add(new THREE.AmbientLight(0x1a2030, 0.6));
 
-  // colored point lights that slowly orbit — gives the facets shifting,
-  // spectrum-like specular glints beyond the shader's own dispersion
-  const spectrumColors = [0x1e6fd9, 0x4a90d9, 0x7ab8e8, 0xbfe0f5];
-  const spectrumLights = spectrumColors.map((c, i) => {
-    const l = new THREE.PointLight(c, 3.2, 20);
-    l.userData.angle = (i / spectrumColors.length) * Math.PI * 2;
-    l.userData.radius = 6 + (i % 2);
-    l.userData.speed = 0.15 + i * 0.04;
-    l.userData.height = (i % 2 === 0 ? 1 : -1) * 2.5;
-    scene.add(l);
-    return l;
-  });
-
-  // ── procedural environment for reflections/refraction (no external HDRI) ──
-  const envScene = new THREE.Scene();
-  const envSphereGeo = new THREE.SphereGeometry(20, 24, 24);
-  const envSphereMat = new THREE.ShaderMaterial({
-    side: THREE.BackSide,
-    uniforms: {},
-    vertexShader: `
-      varying vec3 vPos;
-      void main() {
-        vPos = position;
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-      }
-    `,
-    fragmentShader: `
-      varying vec3 vPos;
-      void main() {
-        float t = clamp(normalize(vPos).y * 0.5 + 0.5, 0.0, 1.0);
-        vec3 top = vec3(0.29, 0.56, 0.85);
-        vec3 mid = vec3(0.05, 0.13, 0.24);
-        vec3 bottom = vec3(0.04, 0.03, 0.08);
-        vec3 col = t > 0.5
-          ? mix(mid, top, (t - 0.5) * 2.0)
-          : mix(bottom, mid, t * 2.0);
-        gl_FragColor = vec4(col, 1.0);
-      }
-    `,
-  });
-  envScene.add(new THREE.Mesh(envSphereGeo, envSphereMat));
-
-  function addEnvPanel(x, y, z, w, h, color, intensity) {
-    const geo = new THREE.PlaneGeometry(w, h);
-    const mat = new THREE.MeshBasicMaterial({ color, toneMapped: false });
-    mat.color.multiplyScalar(intensity);
-    const mesh = new THREE.Mesh(geo, mat);
-    mesh.position.set(x, y, z);
-    mesh.lookAt(0, 0, 0);
-    envScene.add(mesh);
+  // ── starfield backdrop ──
+  const STAR_COUNT = 1400;
+  const starGeo = new THREE.BufferGeometry();
+  const starPos = new Float32Array(STAR_COUNT * 3);
+  for (let i = 0; i < STAR_COUNT; i++) {
+    const r = 18 + Math.random() * 16;
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos(Math.random() * 2 - 1);
+    starPos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+    starPos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+    starPos[i * 3 + 2] = r * Math.cos(phi);
   }
-  addEnvPanel(8, 5, 2, 6, 10, 0xffffff, 1.6);
-  addEnvPanel(-8, -2, 3, 5, 8, 0x2f8fd1, 1.8);
-  addEnvPanel(0, 8, -6, 10, 4, 0x1f5c99, 1.4);
-  addEnvPanel(0, -9, 4, 12, 5, 0x66d9ff, 1.1);
+  starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+  const stars = new THREE.Points(starGeo, new THREE.PointsMaterial({
+    color: 0xdfeaf5, size: 0.055, sizeAttenuation: true, transparent: true, opacity: 0.75,
+  }));
+  scene.add(stars);
 
-  const cubeRT = new THREE.WebGLCubeRenderTarget(256, {
-    format: THREE.RGBAFormat,
-    generateMipmaps: true,
-    minFilter: THREE.LinearMipmapLinearFilter,
-  });
-  const cubeCam = new THREE.CubeCamera(0.1, 50, cubeRT);
-  cubeCam.update(renderer, envScene);
-  scene.environment = cubeRT.texture;
-  scene.background = null;
+  // everything below tilts together as one assembly so the disk reads as a
+  // broad ring around the sphere rather than a flat edge-on line
+  const blackholeGroup = new THREE.Group();
+  const BASE_TILT = -1.05;
+  blackholeGroup.rotation.x = BASE_TILT;
+  scene.add(blackholeGroup);
 
-  // ── the prism: a triangular glass form with hand-written chromatic dispersion ──
-  const prismGeo = new THREE.CylinderGeometry(1.75, 1.75, 3.5, 3, 1);
-  const prismMat = new THREE.ShaderMaterial({
-    uniforms: { uEnvMap: { value: cubeRT.texture } },
+  const HORIZON_R = 1.3;
+  const DISK_INNER = 1.55;
+  const DISK_OUTER = 5.0;
+
+  // ── event horizon: pure black core, bright only right at the silhouette edge ──
+  const horizonGeo = new THREE.SphereGeometry(HORIZON_R, 48, 48);
+  const horizonMat = new THREE.ShaderMaterial({
     vertexShader: `
       varying vec3 vWorldPosition;
       varying vec3 vWorldNormal;
@@ -4091,70 +4053,131 @@
       precision highp float;
       varying vec3 vWorldPosition;
       varying vec3 vWorldNormal;
-      uniform samplerCube uEnvMap;
       void main() {
         vec3 N = normalize(vWorldNormal);
         vec3 V = normalize(cameraPosition - vWorldPosition);
-        vec3 I = -V;
-
-        float fresnel = pow(1.0 - clamp(dot(N, V), 0.0, 1.0), 3.0);
-        fresnel = mix(0.06, 1.0, fresnel);
-
-        vec3 reflectDir = reflect(I, N);
-        vec3 reflectColor = textureCube(uEnvMap, reflectDir).rgb;
-
-        // three slightly different indices of refraction, one per channel —
-        // this split is what produces the rainbow/dispersion fringing
-        vec3 refractR = refract(I, N, 1.0 / 1.64);
-        vec3 refractG = refract(I, N, 1.0 / 1.58);
-        vec3 refractB = refract(I, N, 1.0 / 1.52);
-
-        vec3 dispersed = vec3(
-          textureCube(uEnvMap, refractR).r,
-          textureCube(uEnvMap, refractG).g,
-          textureCube(uEnvMap, refractB).b
-        );
-
-        vec3 color = mix(dispersed, reflectColor, fresnel);
-        color += fresnel * 0.4 * vec3(1.0, 0.95, 1.0);
-        color *= 1.4;
-
-        gl_FragColor = vec4(color, 1.0);
+        float fresnel = pow(1.0 - clamp(dot(N, V), 0.0, 1.0), 4.0);
+        vec3 rim = mix(vec3(1.0, 0.5, 0.12), vec3(1.0, 0.92, 0.75), fresnel);
+        gl_FragColor = vec4(rim * fresnel * 2.4, 1.0);
       }
     `,
   });
-  const prism = new THREE.Mesh(prismGeo, prismMat);
-  prism.rotation.z = Math.PI; // point one edge toward the camera rather than a flat face
-  scene.add(prism);
+  const horizon = new THREE.Mesh(horizonGeo, horizonMat);
+  blackholeGroup.add(horizon);
 
-  // ── a few small metallic accents orbiting the prism for depth ──
-  const accentGeoms = [
-    new THREE.IcosahedronGeometry(0.32, 0),
-    new THREE.TorusGeometry(0.28, 0.1, 14, 24),
-    new THREE.SphereGeometry(0.26, 20, 20),
-  ];
-  const accentTints = [0xd8d8de, 0x2f6fb0, 0x4a90d9];
-  const ACCENT_COUNT = window.innerWidth < 640 ? 3 : 5;
-  const accents = [];
-  for (let i = 0; i < ACCENT_COUNT; i++) {
-    const geo = accentGeoms[i % accentGeoms.length];
-    const mat = new THREE.MeshStandardMaterial({
-      color: accentTints[i % accentTints.length],
-      metalness: 1,
-      roughness: 0.25,
-      envMapIntensity: 1.4,
-    });
-    const mesh = new THREE.Mesh(geo, mat);
-    scene.add(mesh);
-    accents.push({
-      mesh,
-      angle: (i / ACCENT_COUNT) * Math.PI * 2,
-      radius: 3.4 + (i % 3) * 0.6,
-      speed: 0.12 + i * 0.03,
-      height: (i % 2 === 0 ? 1 : -1) * (0.8 + i * 0.3),
-      spin: new THREE.Vector3((Math.random() - 0.5) * 0.8, (Math.random() - 0.5) * 0.8, (Math.random() - 0.5) * 0.8),
+  // ── accretion disk: turbulent, rotating, hotter/brighter toward the inner edge ──
+  const diskGeo = new THREE.RingGeometry(DISK_INNER, DISK_OUTER, 160, 1);
+  const diskMat = new THREE.ShaderMaterial({
+    side: THREE.DoubleSide,
+    transparent: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+    uniforms: {
+      uTime: { value: 0 },
+      uInner: { value: DISK_INNER },
+      uOuter: { value: DISK_OUTER },
+    },
+    vertexShader: `
+      varying vec3 vLocalPos;
+      void main() {
+        vLocalPos = position;
+        gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
+      }
+    `,
+    fragmentShader: `
+      precision highp float;
+      varying vec3 vLocalPos;
+      uniform float uTime;
+      uniform float uInner;
+      uniform float uOuter;
+
+      float hash(vec2 p) {
+        return fract(sin(dot(p, vec2(191.7, 427.3))) * 43213.7521);
+      }
+      float valueNoise(vec2 p) {
+        vec2 i = floor(p);
+        vec2 f = fract(p);
+        float a = hash(i);
+        float b = hash(i + vec2(1.0, 0.0));
+        float c = hash(i + vec2(0.0, 1.0));
+        float d = hash(i + vec2(1.0, 1.0));
+        vec2 u = f * f * (3.0 - 2.0 * f);
+        return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
+      }
+
+      void main() {
+        float r = length(vLocalPos.xy);
+        float t = clamp((r - uInner) / (uOuter - uInner), 0.0, 1.0);
+        float angle = atan(vLocalPos.y, vLocalPos.x);
+
+        vec2 flowCoord = vec2(angle * 2.5 + uTime * 0.5, r * 1.3 - uTime * 0.7);
+        float n = valueNoise(flowCoord * 2.2) * 0.6 + valueNoise(flowCoord * 5.5) * 0.4;
+
+        vec3 hot = vec3(1.0, 0.95, 0.82);
+        vec3 warm = vec3(1.0, 0.55, 0.16);
+        vec3 cool = vec3(0.55, 0.16, 0.08);
+        vec3 col = t < 0.35 ? mix(hot, warm, t / 0.35) : mix(warm, cool, (t - 0.35) / 0.65);
+        col *= 0.65 + n * 0.7;
+
+        float edgeFade = smoothstep(0.0, 0.12, t) * smoothstep(1.0, 0.75, t);
+        float alpha = edgeFade * (0.5 + n * 0.45);
+
+        gl_FragColor = vec4(col, alpha);
+      }
+    `,
+  });
+  const disk = new THREE.Mesh(diskGeo, diskMat);
+  blackholeGroup.add(disk);
+
+  // ── infalling particle stream ("suck in") ──
+  const SUCK_COUNT = window.innerWidth < 640 ? 900 : 2200;
+  const suckGeo = new THREE.BufferGeometry();
+  const suckPos = new Float32Array(SUCK_COUNT * 3);
+  const suckCol = new Float32Array(SUCK_COUNT * 3);
+  const suckData = [];
+  for (let i = 0; i < SUCK_COUNT; i++) {
+    suckData.push({
+      radius: DISK_INNER + Math.random() * (DISK_OUTER - DISK_INNER),
+      angle: Math.random() * Math.PI * 2,
+      zBase: (Math.random() - 0.5) * 0.2,
+      speedMul: 0.7 + Math.random() * 0.8,
     });
   }
+  suckGeo.setAttribute('position', new THREE.BufferAttribute(suckPos, 3));
+  suckGeo.setAttribute('color', new THREE.BufferAttribute(suckCol, 3));
+  const suckPoints = new THREE.Points(suckGeo, new THREE.PointsMaterial({
+    size: 0.045, vertexColors: true, transparent: true, opacity: 0.9,
+    blending: THREE.AdditiveBlending, depthWrite: false, sizeAttenuation: true,
+  }));
+  blackholeGroup.add(suckPoints);
+
+  // ── polar jets ("throw out") ──
+  const JET_COUNT = window.innerWidth < 640 ? 280 : 650;
+  const jetGeo = new THREE.BufferGeometry();
+  const jetPos = new Float32Array(JET_COUNT * 3);
+  const jetCol = new Float32Array(JET_COUNT * 3);
+  const jetData = [];
+  function spawnJet(sign) {
+    return {
+      sign,
+      x: (Math.random() - 0.5) * 0.14,
+      y: (Math.random() - 0.5) * 0.14,
+      z: sign * HORIZON_R * 1.05,
+      speed: 2.8 + Math.random() * 2.4,
+      driftX: (Math.random() - 0.5) * 0.5,
+      driftY: (Math.random() - 0.5) * 0.5,
+      age: 0,
+      maxAge: 1.3 + Math.random() * 0.9,
+    };
+  }
+  for (let i = 0; i < JET_COUNT; i++) jetData.push(spawnJet(i % 2 === 0 ? 1 : -1));
+  jetGeo.setAttribute('position', new THREE.BufferAttribute(jetPos, 3));
+  jetGeo.setAttribute('color', new THREE.BufferAttribute(jetCol, 3));
+  const jetPoints = new THREE.Points(jetGeo, new THREE.PointsMaterial({
+    size: 0.05, vertexColors: true, transparent: false,
+    blending: THREE.AdditiveBlending, depthWrite: false, sizeAttenuation: true,
+  }));
+  blackholeGroup.add(jetPoints);
 
   function resize() {
     const w = host.clientWidth || window.innerWidth;
@@ -4174,11 +4197,10 @@
   });
   ro.observe(host);
 
-  // ── pointer, mapped onto a plane at z=0 in world space — tilts the prism ──
+  // ── pointer: raycast onto the (tilted) disk plane, in the group's local space ──
   const pointerNDC = new THREE.Vector2(0, 0);
-  const pointerWorld = new THREE.Vector3(0, 0, 0);
   const raycaster = new THREE.Raycaster();
-  const zeroPlane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
+  const pointerLocal = new THREE.Vector3(9999, 9999, 9999);
   let pointerActive = false;
   let tiltX = 0, tiltY = 0;
 
@@ -4192,6 +4214,79 @@
 
   window.addEventListener('pointermove', onPointerMove);
   section.addEventListener('pointerleave', onPointerLeave);
+
+  const worldHit = new THREE.Vector3();
+  const planeNormal = new THREE.Vector3();
+  const diskPlane = new THREE.Plane();
+
+  function updatePointerHit() {
+    if (!pointerActive) return;
+    raycaster.setFromCamera(pointerNDC, camera);
+    planeNormal.set(0, 0, 1).applyQuaternion(blackholeGroup.quaternion);
+    diskPlane.setFromNormalAndCoplanarPoint(planeNormal, blackholeGroup.position);
+    if (raycaster.ray.intersectPlane(diskPlane, worldHit)) {
+      pointerLocal.copy(worldHit);
+      blackholeGroup.worldToLocal(pointerLocal);
+    }
+  }
+
+  function updateSuck(dt) {
+    for (let i = 0; i < SUCK_COUNT; i++) {
+      const d = suckData[i];
+      const x = Math.cos(d.angle) * d.radius;
+      const y = Math.sin(d.angle) * d.radius;
+      const z = d.zBase * THREE.MathUtils.clamp(d.radius / DISK_OUTER, 0.15, 1);
+
+      suckPos[i * 3] = x; suckPos[i * 3 + 1] = y; suckPos[i * 3 + 2] = z;
+
+      const heat = 1 - THREE.MathUtils.clamp((d.radius - HORIZON_R) / (DISK_OUTER - HORIZON_R), 0, 1);
+      suckCol[i * 3] = 1.0;
+      suckCol[i * 3 + 1] = 0.3 + heat * 0.6;
+      suckCol[i * 3 + 2] = 0.08 + heat * 0.82;
+
+      let pull = 1;
+      if (pointerActive) {
+        const dx = x - pointerLocal.x, dy = y - pointerLocal.y;
+        const pd = Math.hypot(dx, dy);
+        const influence = 2.4;
+        if (pd < influence) pull = 1 + (1 - pd / influence) * 3;
+      }
+
+      const angVel = d.speedMul * (2.4 / Math.pow(d.radius, 1.25));
+      d.angle += angVel * dt * pull;
+      d.radius -= 0.42 * d.speedMul * dt * pull;
+
+      if (d.radius < HORIZON_R) {
+        d.radius = DISK_OUTER * (0.8 + Math.random() * 0.2);
+        d.angle = Math.random() * Math.PI * 2;
+        d.zBase = (Math.random() - 0.5) * 0.2;
+      }
+    }
+    suckGeo.attributes.position.needsUpdate = true;
+    suckGeo.attributes.color.needsUpdate = true;
+  }
+
+  function updateJets(dt) {
+    for (let i = 0; i < JET_COUNT; i++) {
+      let p = jetData[i];
+      p.age += dt;
+      const tNorm = p.age / p.maxAge;
+      if (tNorm >= 1) { p = spawnJet(p.sign); jetData[i] = p; }
+
+      p.z += p.sign * p.speed * dt * (1 + tNorm * 0.8);
+      p.x += p.driftX * dt;
+      p.y += p.driftY * dt;
+
+      jetPos[i * 3] = p.x; jetPos[i * 3 + 1] = p.y; jetPos[i * 3 + 2] = p.z;
+
+      const fade = Math.max(0, 1 - tNorm);
+      jetCol[i * 3] = 0.55 * fade;
+      jetCol[i * 3 + 1] = 0.78 * fade;
+      jetCol[i * 3 + 2] = 1.0 * fade;
+    }
+    jetGeo.attributes.position.needsUpdate = true;
+    jetGeo.attributes.color.needsUpdate = true;
+  }
 
   // ── run the render loop only while the section is on screen ──
   let running = false;
@@ -4232,31 +4327,19 @@
     tPrev = now;
     clock += dt;
 
-    if (pointerActive) {
-      raycaster.setFromCamera(pointerNDC, camera);
-      raycaster.ray.intersectPlane(zeroPlane, pointerWorld);
-    }
+    updatePointerHit();
 
-    const targetTiltY = pointerActive ? THREE.MathUtils.clamp(pointerWorld.x * 0.12, -0.6, 0.6) : 0;
-    const targetTiltX = pointerActive ? THREE.MathUtils.clamp(-pointerWorld.y * 0.1, -0.5, 0.5) : 0;
-    tiltX += (targetTiltX - tiltX) * Math.min(1, dt * 2.5);
-    tiltY += (targetTiltY - tiltY) * Math.min(1, dt * 2.5);
+    const targetTiltY = pointerActive ? THREE.MathUtils.clamp(pointerNDC.x * 0.25, -0.35, 0.35) : 0;
+    const targetTiltX = pointerActive ? THREE.MathUtils.clamp(pointerNDC.y * 0.15, -0.2, 0.2) : 0;
+    tiltX += (targetTiltX - tiltX) * Math.min(1, dt * 2.2);
+    tiltY += (targetTiltY - tiltY) * Math.min(1, dt * 2.2);
+    blackholeGroup.rotation.x = BASE_TILT + tiltX;
+    blackholeGroup.rotation.y = tiltY;
 
-    prism.rotation.y = clock * 0.22 + tiltY;
-    prism.rotation.x = Math.sin(clock * 0.3) * 0.12 + tiltX;
-
-    spectrumLights.forEach((l) => {
-      const a = l.userData.angle + clock * l.userData.speed;
-      l.position.set(Math.cos(a) * l.userData.radius, l.userData.height, Math.sin(a) * l.userData.radius);
-    });
-
-    for (const acc of accents) {
-      const a = acc.angle + clock * acc.speed;
-      acc.mesh.position.set(Math.cos(a) * acc.radius, acc.height + Math.sin(clock * 0.4 + acc.angle) * 0.3, Math.sin(a) * acc.radius);
-      acc.mesh.rotation.x += acc.spin.x * dt;
-      acc.mesh.rotation.y += acc.spin.y * dt;
-      acc.mesh.rotation.z += acc.spin.z * dt;
-    }
+    diskMat.uniforms.uTime.value = clock;
+    updateSuck(dt);
+    updateJets(dt);
+    stars.rotation.y += dt * 0.01;
 
     renderer.render(scene, camera);
     raf = requestAnimationFrame(frame);
